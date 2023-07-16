@@ -1,5 +1,6 @@
 import sys
-
+import matplotlib.pyplot as plt
+import seaborn as sns
 import pandas as pd
 from sklearn.compose import ColumnTransformer
 
@@ -71,6 +72,20 @@ def create_testing_scenarios(experience_year=[1, 31]):
         "profesija": [334],
     }
     return pd.DataFrame(ParameterGrid(param_grid))
+
+
+def plot_predictions(data):
+    sns.scatterplot(
+        x="stazas",
+        y="predictions",
+        data=r,
+        hue="lytis",
+        size="darbo_laiko_dalis",
+        palette=["red", "blue"],
+    )
+    plt.xlabel("Work experience, years")
+    plt.ylabel("Predicted yearly salary, eur")
+    return plt
 
 
 def prepare_data(data):
@@ -155,6 +170,9 @@ if __name__ == "__main__":
     predictions = model.predict(scenarios)
     r = scenarios.assign(predictions=predictions)
     print(r)
+
+    img = plot_predictions(r)
+    img.show()
 
     best_parameters = find_best_model_parameters(X_train, X_test, y_train, y_test)
     print("best parameters:")
