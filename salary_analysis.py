@@ -1,22 +1,29 @@
+import sys
+
 import pandas as pd
 from sklearn.compose import ColumnTransformer
 
 # from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import GridSearchCV, ParameterGrid, train_test_split
 from sklearn.pipeline import Pipeline, make_pipeline
 from sklearn.preprocessing import OneHotEncoder, PolynomialFeatures
-from sklearn.model_selection import ParameterGrid
-from sklearn.model_selection import GridSearchCV
+
+sys.stdout.reconfigure(encoding="utf-8")
 
 DATA_PATH = "https://get.data.gov.lt/datasets/gov/lsd/darbo_uzmokestis/DarboUzmokestis2018/:format/csv"
+EXTERNAL_DATA_PATH = "data/raw/profesijos.csv"
 
 
 def load_data():
     data = pd.read_csv(DATA_PATH)
     data = data.drop(columns=["_type", "_revision"], axis=1)
     return data.head(5000)
+
+
+def load_external_data(path=EXTERNAL_DATA_PATH):
+    return pd.read_csv(path)
 
 
 def create_model():
@@ -116,9 +123,22 @@ def find_best_model_parameters(X_train, X_test, y_train, y_test):
     return x.loc[:, "param_pol__degree":"param_preprocessor__num__imputer__strategy"]
 
 
+def add_external_data(org_df, ext_df):
+    """Function adds profession description data to original dataframe based on profession number"""
+    proffesions_list = []
+    for ind in org_df.index:
+        proffesions_list.append(
+            ext_df.loc[
+                ext_df["Kodas"] == org_df["profesija"][ind], "Pavadinimas"
+            ].item()
+        )
+    return org_df.assign(profesijos_apibudinimas=proffesions_list)
+
+
 if __name__ == "__main__":
     data = load_data()
-
+    data_ext = load_external_data()
+    data = add_external_data(data, data_ext)
     X_train, X_test, y_train, y_test = prepare_data(data)
     print("Train test splitted")
     model = create_model()
