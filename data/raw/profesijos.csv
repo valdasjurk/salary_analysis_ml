@@ -1,0 +1,620 @@
+﻿Kodas,Pavadinimas
+1,Vadovai
+11,"Teisės aktų leidėjai, vyresnieji valstybės tarnautojai, įmonių, įstaigų, organizacijų ir kiti vadovai"
+111,Teisės aktų leidėjai ir vyresnieji valstybės tarnautojai
+1111,Teisės aktų leidėjai
+1112,Vyresnieji valstybės tarnautojai
+1113,Seniūnai
+1114,Specialios paskirties organizacijų vadovai
+112,"Įmonių, įstaigų ir organizacijų vadovai"
+1120,"Įmonių, įstaigų ir organizacijų vadovai"
+12,Administravimo ir komercijos vadovai
+121,Verslo paslaugų srities ir administracijos vadovai
+1211,Finansų srities vadovai
+1212,Žmogiškųjų išteklių srities vadovai
+1213,Politikos ir planavimo srities vadovai
+1219,Kitur nepriskirti verslo paslaugų srities ir administracijos vadovai
+122,"Pardavimo, rinkodaros ir plėtros vadovai"
+1221,Pardavimo ir rinkodaros vadovai
+1222,Reklamos ir viešųjų ryšių srities vadovai
+1223,Mokslinių tyrimų ir plėtros vadovai
+13,Gamybos ir specializuotų paslaugų srities vadovai
+131,"Žemės, miškų ir žuvininkystės ūkio produkcijos gamybos vadovai"
+1311,Žemės ir miškų ūkio produkcijos gamybos vadovai
+1312,Akvakultūros ir žuvininkystės ūkio produkcijos gamybos vadovai
+132,"Gamybos, gavybos, statybos ir platinimo vadovai"
+1321,Gamybos vadovai
+1322,Gavybos vadovai
+1323,Statybos vadovai
+1324,"Tiekimo, platinimo ir panašių paslaugų vadovai"
+133,Informacinių technologijų ir ryšių paslaugų srities vadovai
+1330,Informacinių technologijų ir ryšių paslaugų srities vadovai
+134,Profesionaliųjų paslaugų srities vadovai
+1341,Vaikų priežiūros paslaugų srities vadovai
+1342,Sveikatinimo paslaugų srities vadovai
+1343,Pagyvenusių žmonių slaugos ir socialinių paslaugų srities vadovai
+1344,Socialinės paramos vadovai
+1345,Švietimo srities vadovai
+1346,Finansinių ir draudimo paslaugų padalinių vadovai
+1349,Kitur nepriskirti profesionaliųjų paslaugų srities vadovai
+14,"Viešbučių ir restoranų, mažmeninės prekybos ir kitų paslaugų srities vadovai"
+141,Viešbučių ir restoranų vadovai
+1411,Viešbučių vadovai
+1412,Restoranų vadovai
+142,Mažmeninės ir didmeninės prekybos vadovai
+1420,Mažmeninės ir didmeninės prekybos vadovai
+143,Kitų paslaugų srities vadovai
+1431,"Sporto, laisvalaikio ir kultūros įstaigų vadovai"
+1439,Kitur nepriskirti paslaugų srities vadovai
+2,Specialistai
+21,Fizinių mokslų ir inžinerijos specialistai
+211,Fizinių mokslų specialistai
+2111,Fizikai ir astronomai
+2112,Meteorologai
+2113,Chemikai
+2114,Geologai ir geofizikai
+212,"Matematikai, aktuarai ir statistikai"
+2120,"Matematikai, aktuarai ir statistikai"
+213,Gyvosios gamtos mokslų specialistai
+2131,"Biologai, botanikai, zoologai ir giminiškų profesijų specialistai"
+2132,Žemės ir miškų ūkio bei žuvininkystės specialistai
+2133,Aplinkos apsaugos specialistai
+214,Inžinerijos specialistai (išskyrus elektros technologijų inžinierius)
+2141,Technologijų ir gamybos inžinieriai
+2142,Statybos inžinieriai
+2143,Ekologijos inžinieriai
+2144,Mechanikos inžinieriai
+2145,Chemijos inžinieriai
+2146,"Gavybos inžinieriai, metalurgai ir giminiškų profesijų specialistai"
+2149,Kitur nepriskirti inžinerijos specialistai
+215,Elektros technologijų inžinieriai
+2151,Elektros inžinieriai
+2152,Elektronikos inžinieriai
+2153,Telekomunikacijų inžinieriai
+216,"Architektai, planuotojai, topografai ir dizaineriai"
+2161,Statybos architektai
+2162,Kraštovaizdžio architektai
+2163,Produktų ir drabužių dizaineriai
+2164,Miestų ir kelių eismo planuotojai
+2165,Kartografai ir topografai
+2166,Grafikos ir multimedijos dizaineriai
+22,Sveikatos specialistai
+221,Gydytojai
+2211,Bendrosios praktikos gydytojai
+2212,Gydytojai specialistai
+222,Slaugos ir akušerijos specialistai
+2221,Slaugos specialistai
+2222,Akušerijos specialistai
+223,Tradicinės ir liaudies medicinos specialistai
+2230,Tradicinės ir liaudies medicinos specialistai
+224,Paramedikai
+2240,Paramedikai
+225,Veterinarai
+2250,Veterinarai
+226,Kiti sveikatos specialistai
+2261,Gydytojai odontologai
+2262,Vaistininkai
+2263,"Aplinkos, profesinės sveikatos ir higienos specialistai"
+2264,Fizioterapeutai
+2265,Dietistai ir mitybos specialistai
+2266,Audiologai ir kalbos terapeutai
+2267,Optometrijos specialistai ir optikai
+2269,Kitur nepriskirti sveikatos specialistai
+23,Mokymo specialistai
+231,Aukštųjų mokyklų dėstytojai
+2310,Aukštųjų mokyklų dėstytojai
+232,Profesijos mokytojai
+2320,Profesijos mokytojai
+233,Pagrindinio ir vidurinio ugdymo mokytojai
+2330,Pagrindinio ir vidurinio ugdymo mokytojai
+234,Pradinio ir ikimokyklinio ugdymo mokytojai
+2341,Pradinio ugdymo mokytojai
+2342,Ikimokyklinio ugdymo mokytojai
+235,Kiti mokymo specialistai
+2351,Švietimo metodų specialistai
+2352,Specialiųjų poreikių mokinių mokytojai
+2353,Neformaliojo švietimo kalbų mokytojai
+2354,Neformaliojo švietimo muzikos mokytojai
+2355,Neformaliojo švietimo meninio ugdymo mokytojai
+2356,Neformaliojo švietimo informacinių technologijų praktikos mokytojai
+2359,Kitur nepriskirti mokymo specialistai
+24,Verslo ir administravimo specialistai
+241,Finansų specialistai
+2411,Buhalteriai
+2412,Finansų ir investicijų konsultantai
+2413,Finansų analitikai
+242,Administravimo specialistai
+2421,Vadybos ir organizavimo analitikai
+2422,Politikos ir administravimo specialistai
+2423,Personalo ir profesinio orientavimo specialistai
+2424,Mokymo ir darbuotojų ugdymo specialistai
+243,"Pardavimo, rinkodaros ir viešųjų ryšių specialistai"
+2431,Reklamos ir rinkodaros specialistai
+2432,Viešųjų ryšių specialistai
+2433,Technikos ir medicinos sričių pardavimo (išskyrus informacinių technologijų ir ryšių paslaugų pardavimą) specialistai
+2434,Informacinių technologijų ir ryšių paslaugų pardavimo specialistai
+25,Informacinių technologijų ir ryšių sistemų specialistai
+251,Programinės įrangos ir taikomųjų programų kūrėjai ir analitikai
+2511,Sistemų analitikai
+2512,Programinės įrangos kūrėjai
+2513,Saityno ir multimedijos kūrėjai
+2514,Taikomųjų programų kūrėjai
+2519,Kitur nepriskirti programinės įrangos ir taikomųjų programų kūrėjai ir analitikai
+252,Duomenų bazių ir tinklų specialistai
+2521,Duomenų bazių projektuotojai ir administratoriai
+2522,Sistemų administratoriai
+2523,Kompiuterių tinklų specialistai
+2529,Kitur nepriskirti duomenų bazių ir tinklų specialistai
+26,"Teisės, socialinės srities ir kultūros specialistai"
+261,Teisės specialistai
+2611,Teisininkai
+2612,Teisėjai
+2619,Kitur nepriskirti teisės specialistai
+262,"Bibliotekininkai, archyvų ir muziejų specialistai"
+2621,Archyvų ir muziejų specialistai
+2622,Bibliotekininkai ir kiti informacijos specialistai
+263,Socialinės ir religinės sričių specialistai
+2631,Ekonomistai
+2632,"Sociologai, antropologai ir giminiškų profesijų specialistai"
+2633,"Filosofai, istorikai ir politologai"
+2634,Psichologai
+2635,Socialiniai darbuotojai ir konsultantai
+2636,Religijų specialistai
+264,"Autoriai, žurnalistai ir kalbininkai"
+2641,Autoriai ir kiti rašytojai
+2642,Žurnalistai
+2643,Vertėjai ir kalbininkai
+265,Kūrybiniai darbuotojai ir atlikėjai
+2651,Regimojo meno kūrėjai ir atlikėjai
+2652,"Muzikantai, dainininkai ir kompozitoriai"
+2653,Šokėjai ir choreografai
+2654,"Kino, teatro ir panašių sričių režisieriai ir prodiuseriai"
+2655,Aktoriai
+2656,"Radijo, televizijos ir kitų informacijos sklaidos priemonių diktoriai"
+2659,Kitur nepriskirti kūrybiniai darbuotojai ir atlikėjai
+3,Technikai ir jaunesnieji specialistai
+31,Jaunesnieji fizinių mokslų ir inžinerijos specialistai
+311,Fizinių mokslų ir inžinerijos technikai
+3111,Chemijos ir kitų fizinių mokslų technikai
+3112,Statybos inžinerijos technikai
+3113,Elektros inžinerijos technikai
+3114,Elektronikos inžinerijos technikai
+3115,Mechanikos inžinerijos technikai
+3116,Cheminės inžinerijos technikai
+3117,Gavybos ir metalurgijos technikai
+3118,Braižytojai
+3119,Kitur nepriskirti fizinių mokslų ir inžinerijos technikai
+312,"Gavybos, gamybos ir statybos darbų meistrai ir brigadininkai"
+3121,Gavybos darbų meistrai ir brigadininkai
+3122,Gamybos darbų meistrai ir brigadininkai
+3123,Statybos darbų meistrai ir brigadininkai
+313,Technologinių procesų valdymo technikai
+3131,Elektrinių operatoriai
+3132,Atliekų deginimo ir vandens valymo įrenginių operatoriai
+3133,Cheminio apdorojimo įrenginių valdymo operatoriai
+3134,Naftos ir gamtinių dujų perdirbimo įrenginių operatoriai
+3135,Metalurgijos technologinių procesų valdymo įrangos operatoriai
+3139,Kitur nepriskirti technologinių procesų valdymo technikai
+314,Gyvosios gamtos mokslų technikai ir jaunesnieji giminiškų profesijų specialistai
+3141,Gyvosios gamtos mokslų technikai (išskyrus medicinos ir patologijos laboratorijų technikus)
+3142,Žemės ūkio technikai
+3143,Jaunesnieji miškų ūkio specialistai
+315,Laivų ir orlaivių valdymo vadovai ir technikai
+3151,Laivų mechanikai
+3152,Laivavedžiai ir laivų kapitonai
+3153,Orlaivių pilotai ir kiti giminiškų profesijų specialistai
+3154,Skrydžių vadovai
+3155,Skrydžių saugos elektronikos technikai
+32,Jaunesnieji sveikatos specialistai
+321,Medicinos ir farmacijos technikai
+3211,Medicininio vizualizavimo ir medicininės įrangos technikai
+3212,Medicinos ir patologijos laboratorijų technikai
+3213,Farmacijos technikai ir vaistininkų padėjėjai
+3214,Medicinos ir dantų technikai
+322,Jaunesnieji slaugos ir akušerijos specialistai
+3221,Jaunesnieji slaugos specialistai
+3222,Jaunesnieji akušerijos specialistai
+323,Jaunesnieji tradicinės ir liaudies medicinos specialistai
+3230,Jaunesnieji tradicinės ir liaudies medicinos specialistai
+324,Veterinarijos technikai ir felčeriai
+3240,Veterinarijos technikai ir felčeriai
+325,Kiti jaunesnieji sveikatos specialistai
+3251,Gydytojo odontologo padėjėjai ir burnos higienistai
+3252,Medicininių įrašų ir sveikatos informacijos technikai
+3253,Visuomenės sveikatos priežiūros darbuotojai
+3254,Optikai
+3255,Fizioterapijos technikai ir fizioterapeutų padėjėjai
+3256,Gydytojo padėjėjai
+3257,Aplinkos ir profesinės sveikatos inspektoriai ir darbuotojai
+3258,Skubiosios medicinos pagalbos darbuotojai
+3259,Kitur nepriskirti jaunesnieji sveikatos specialistai
+33,Jaunesnieji verslo ir administravimo specialistai
+331,Jaunesnieji finansų ir matematikos specialistai
+3311,Vertybinių popierių ir finansų makleriai ir brokeriai
+3312,Kreditų ir paskolų specialistai
+3313,Jaunesnieji apskaitos specialistai
+3314,"Statistikai, matematikai ir jaunesnieji giminiškų profesijų specialistai"
+3315,Nuostolių ir kiti vertintojai
+332,Pardavimo ir pirkimo agentai ir brokeriai
+3321,Draudimo agentai
+3322,Pardavimo atstovai
+3323,Pirkimo specialistai
+3324,Prekybos brokeriai
+333,Verslo paslaugų agentai
+3331,Muitinės dokumentų tvarkymo ir prekių vežimo agentai
+3332,Konferencijų ir renginių planuotojai
+3333,Įdarbinimo agentai ir darbo sutarčių sudarytojai
+3334,Nekilnojamojo turto agentai ir pardavėjai
+3339,Kitur nepriskirti verslo paslaugų agentai
+334,Administravimo ir specialiųjų sričių sekretoriai
+3341,Vyresnieji raštinės darbuotojai
+3342,Teisės institucijų sekretoriai
+3343,Administravimo ir vykdomieji sekretoriai
+3344,Medicinos sekretoriai
+335,Jaunesnieji valstybės tarnybų specialistai
+3351,Muitinės ir pasienio inspektoriai
+3352,Mokesčių tarnybų jaunesnieji specialistai
+3353,Socialinių išmokų specialistai
+3354,Licencijų išdavimo specialistai
+3355,Policijos specialistai ir tyrėjai
+3359,Kitur nepriskirti jaunesnieji valstybės tarnybų specialistai
+34,"Jaunesnieji teisės, socialinės srities, kultūros ir giminiškų profesijų specialistai"
+341,"Jaunesnieji teisės, socialinių ir religijos profesijų specialistai"
+3411,Jaunesnieji teisės ir giminiškų profesijų specialistai
+3412,Jaunesnieji socialiniai darbuotojai
+3413,Jaunesnieji religijos profesijų specialistai
+342,Sporto ir kūno rengybos darbuotojai
+3421,Sportininkai ir žaidėjai
+3422,"Sporto treneriai, instruktoriai ir teisėjai"
+3423,Kūno rengybos ir poilsio instruktoriai bei programų vadovai
+343,"Jaunesnieji meno, kultūros ir kulinarijos specialistai"
+3431,Fotografai
+3432,Interjero dizaineriai ir dekoratoriai
+3433,"Galerijų, muziejų ir bibliotekų technikai"
+3434,Vyriausieji virėjai
+3435,Kiti jaunesnieji meno ir kultūros specialistai
+35,Informacinių ir ryšių sistemų technikai
+351,Informacinių technologijų ir ryšių sistemų eksploatavimo ir pagalbos jų naudotojams technikai
+3511,Informacinių technologijų ir ryšių sistemų eksploatavimo technikai
+3512,Pagalbos informacinių technologijų ir ryšių sistemų naudotojams technikai
+3513,Kompiuterių tinklų ir sistemų technikai
+3514,Saityno technikai
+352,Telekomunikacijų ir transliavimo technikai
+3521,Transliavimo ir garso bei vaizdo sistemų technikai
+3522,Telekomunikacijų inžinerijos technikai
+4,Tarnautojai
+41,"Tarnautojai, atliekantys bendras funkcijas, ir klavišinių įtaisų operatoriai"
+411,"Tarnautojai, atliekantys bendras funkcijas"
+4110,"Tarnautojai, atliekantys bendras funkcijas"
+412,"Sekretoriai, atliekantys bendras funkcijas"
+4120,"Sekretoriai, atliekantys bendras funkcijas"
+413,Klavišinių įtaisų operatoriai
+4131,Mašininkai ir tekstų tvarkybos operatoriai
+4132,Duomenų įvesties operatoriai
+42,Klientų aptarnavimo tarnautojai
+421,Kasininkai ir giminiškų profesijų tarnautojai
+4211,Bankų kasininkai ir giminiškų profesijų tarnautojai
+4212,"Lažybų tarpininkai, lošimo namų tarnautojai ir panašūs lošimų tarnautojai"
+4213,Lombardų tarnautojai ir pinigų skolintojai
+4214,Skolų išieškotojai ir giminiškų profesijų tarnautojai
+422,Klientų informavimo tarnautojai
+4221,Kelionių konsultantai ir tarnautojai
+4222,Nuotolinio klientų informavimo tarnautojai
+4223,Telefonų skirstiklių operatoriai
+4224,Viešbučių registratoriai
+4225,Atsakymų į užklausas ir informavimo tarnautojai
+4226,"Klientų priėmimo tarnautojai, atliekantys bendras funkcijas"
+4227,Apklausų atlikėjai
+4229,Kitur nepriskirti klientų informavimo tarnautojai
+43,"Apskaitos, statistikos, finansų ir materialinių vertybių apskaitos tarnautojai"
+431,"Apskaitos, statistikos ir finansų tarnautojai"
+4311,Apskaitos ir buhalterijos tarnautojai
+4312,"Statistikos, finansų ir draudimo tarnautojai"
+4313,Darbo užmokesčio apskaitos tarnautojai
+432,Materialinių vertybių apskaitos ir transporto tarnautojai
+4321,Sandėliavimo tarnybos tarnautojai
+4322,Tiekimo tarnautojai
+4323,Transporto tarnautojai
+44,Kiti tarnautojai
+441,Kiti tarnautojai
+4411,Bibliotekų tarnautojai
+4412,Paštininkai ir giminiškų profesijų tarnautojai
+4413,"Informacijos kodavimo, korektūros ir kitokios tvarkybos tarnautojai"
+4414,Raštininkai ir giminiškų profesijų tarnautojai
+4415,Kartotekų ir kopijavimo tarnautojai
+4416,Darbuotojų informacijos tarnautojai
+4419,Kitur nepriskirti tarnautojai
+5,Paslaugų sektoriaus darbuotojai ir pardavėjai
+51,Paslaugų asmenims darbuotojai
+511,"Kelionių palydovai, konduktoriai ir kelionių vadovai"
+5111,Kelionių palydovai
+5112,Transporto priemonių konduktoriai
+5113,Kelionių vadovai
+512,Virėjai
+5120,Virėjai
+513,Padavėjai ir barmenai
+5131,Padavėjai
+5132,Barmenai
+514,"Kirpėjai, kosmetikai ir giminiškų profesijų darbuotojai"
+5141,Kirpėjai
+5142,Kosmetikai ir giminiškų profesijų darbuotojai
+515,Vyresnieji pastatų ir bendrosios priežiūros darbuotojai
+5151,"Vyresnieji biurų, viešbučių ir kitų įstaigų valymo ir bendrosios priežiūros darbuotojai"
+5152,Namų ūkio ekonomai
+5153,Pastatų prižiūrėtojai
+516,Kiti paslaugų asmenims darbuotojai
+5161,"Astrologai, būrėjai ir giminiškų profesijų darbuotojai"
+5162,Tarnai ir palydovai
+5163,Laidojimo paslaugų darbuotojai
+5164,Gyvūnų (augintinių) higienos ir priežiūros darbuotojai
+5165,Vairavimo instruktoriai
+5169,Kitur nepriskirti paslaugų asmenims darbuotojai
+52,Pardavėjai
+521,Gatvės prekystalių ir turgaviečių pardavėjai
+5211,Kioskų ir turgaviečių pardavėjai
+5212,Maisto produktų gatvės pardavėjai
+522,Parduotuvių pardavėjai
+5221,Krautuvininkai
+5222,Vyresnieji parduotuvių darbuotojai
+5223,Parduotuvių pardavėjai
+523,Kasininkai ir bilietų pardavėjai
+5230,Kasininkai ir bilietų pardavėjai
+524,Kiti pardavėjai
+5241,Madų ir panašūs demonstruotojai
+5242,Prekių demonstruotojai
+5243,Išnešiojamosios prekybos pardavėjai
+5244,Nuotolinės prekybos pardavėjai
+5245,Degalinių operatoriai
+5246,Maitinimo paslaugų prekystalių pardavėjai
+5249,Kitur nepriskirti pardavėjai
+53,Asmens priežiūros darbuotojai
+531,Vaikų priežiūros darbuotojai ir mokytojų padėjėjai
+5311,Vaikų priežiūros darbuotojai
+5312,Mokytojų padėjėjai
+532,Asmens sveikatos priežiūros darbuotojai
+5321,Asmens sveikatos priežiūros padėjėjai
+5322,Asmens priežiūros namuose darbuotojai
+5329,Kitur nepriskirti asmens sveikatos priežiūros darbuotojai
+54,Apsaugos darbuotojai
+541,Apsaugos darbuotojai
+5411,Ugniagesiai
+5412,Policijos pareigūnai
+5413,Įkalinimo įstaigų sargybiniai
+5414,Apsaugos darbuotojai
+5419,Kitur nepriskirti apsaugos darbuotojai
+6,"Kvalifikuoti žemės, miškų ir žuvininkystės ūkio darbuotojai"
+61,Kvalifikuoti prekinio žemės ūkio darbuotojai
+611,Kultūrinių augalų augintojai
+6111,Kultūrinių lauko augalų ir daržovių augintojai
+6112,Vaismedžių ir vaiskrūmių augintojai
+6113,"Sodininkai, daržininkai, medelynų ir daigynų darbuotojai"
+6114,Mišriųjų kultūrinių augalų augintojai
+612,Gyvūnų augintojai
+6121,Gyvulių augintojai
+6122,Paukščių augintojai
+6123,Bitininkai
+6129,Kitur nepriskirti gyvūnų augintojai
+613,Kultūrinių augalų ir gyvūnų augintojai
+6130,Kultūrinių augalų ir gyvūnų augintojai
+62,"Kvalifikuoti prekinio miškų, žuvininkystės ir medžioklės ūkio darbuotojai"
+621,Miškų ūkio ir giminiškų profesijų darbuotojai
+6210,Miškų ūkio ir giminiškų profesijų darbuotojai
+622,Žvejai ir medžiotojai
+6221,Akvakultūros ūkio darbuotojai
+6222,Vidaus ir priekrantės vandenų žvejai
+6223,Giliavandenės žvejybos žvejai
+6224,Medžiotojai
+63,"Natūraliojo ūkio kultūrinių augalų ir gyvulių augintojai, žvejai, miško gėrybių ir vaistažolių rinkėjai"
+631,Natūraliojo ūkio kultūrinių augalų augintojai
+6310,Natūraliojo ūkio kultūrinių augalų augintojai
+632,Natūraliojo ūkio gyvulių augintojai
+6320,Natūraliojo ūkio gyvulių augintojai
+633,Mišriojo natūraliojo ūkio kultūrinių augalų ir gyvulių augintojai
+6330,Mišriojo natūraliojo ūkio kultūrinių augalų ir gyvulių augintojai
+634,"Natūraliojo ūkio žvejai, miško gėrybių ir vaistažolių rinkėjai"
+6340,"Natūraliojo ūkio žvejai, miško gėrybių ir vaistažolių rinkėjai"
+7,Kvalifikuoti darbininkai ir amatininkai
+71,Statybininkai ir giminiškų profesijų darbininkai (išskyrus elektrikus)
+711,Statybininkai montuotojai ir giminiškų profesijų darbininkai
+7111,Statybininkai
+7112,Plytų mūrininkai ir giminiškų profesijų darbininkai
+7113,"Akmenų mūrininkai, akmenskaldžiai, akmentašiai ir raižytojai"
+7114,"Betonuotojai, betono apdailininkai ir giminiškų profesijų darbininkai"
+7115,Dailidės ir staliai
+7119,Kitur nepriskirti statybininkai montuotojai ir giminiškų profesijų darbininkai
+712,Statybininkai apdailininkai ir giminiškų profesijų darbininkai
+7121,Stogdengiai
+7122,Grindų ir plytelių klojėjai
+7123,Tinkuotojai
+7124,Darbininkai izoliuotojai
+7125,Stikliai
+7126,Vandentiekininkai ir vamzdynų montuotojai
+7127,Oro kondicionavimo ir šaldymo įrenginių mechanikai
+713,"Dažytojai, statybinių konstrukcijų valytojai ir giminiškų profesijų darbininkai"
+7131,Dažytojai ir giminiškų profesijų darbininkai
+7132,Dažytojai purškėjai ir lakuotojai
+7133,Statybinių konstrukcijų valytojai
+72,"Metalo apdirbimo, mašinų gamybos ir giminiškų profesijų darbininkai"
+721,"Skardininkai, metalinių konstrukcijų montuotojai, metalo liejikai, suvirintojai ir giminiškų profesijų darbininkai"
+7211,Metalo liejikai ir liejimo formų gamintojai
+7212,Suvirintojai
+7213,Skardininkai
+7214,Metalinių konstrukcijų ruošėjai ir montuotojai
+7215,Takelažininkai ir lynų sujungėjai
+722,"Kalviai, įrankininkai ir giminiškų profesijų darbininkai"
+7221,"Kalviai, štampuotojai ir kalimo presų operatoriai"
+7222,Įrankininkai ir giminiškų profesijų darbininkai
+7223,Metalo apdirbimo staklių derintojai ir operatoriai
+7224,"Metalo poliruotojai, šlifuotojai ir įrankių galąstojai"
+723,Mašinų mechanikai ir taisytojai
+7231,Variklinių transporto priemonių mechanikai ir taisytojai
+7232,Orlaivių variklių mechanikai ir taisytojai
+7233,Pramonės ir žemės ūkio mašinų mechanikai ir taisytojai
+7234,Dviračių ir panašių mechanizmų taisytojai
+73,Amatininkai ir spausdinimo darbininkai
+731,Amatininkai
+7311,Tiksliųjų prietaisų ir įrankių gamintojai ir taisytojai
+7312,Muzikos instrumentų gamintojai ir derintojai
+7313,Juvelyrai ir tauriųjų metalų apdirbėjai
+7314,"Keramikai, puodžiai ir giminiškų profesijų darbininkai"
+7315,"Stiklo dirbinių meistrai, pjaustytojai ir šlifuotojai"
+7316,"Ženklų piešėjai, dekoruotojai, graviruotojai ir ėsdintojai"
+7317,"Amatininkai, gaminantys dirbinius iš medienos, vytelių ir panašių medžiagų"
+7318,"Amatininkai, gaminantys dirbinius iš tekstilės, odos ir panašių medžiagų"
+7319,Kitur nepriskirti amatininkai
+732,Spausdinimo darbininkai
+7321,Spausdinimo formų surinkėjai ir ruošėjai
+7322,Spaustuvininkai
+7323,Spaudinių apdailos darbininkai ir knygrišiai
+74,Elektromechaninių ir elektroninių įrenginių mechanikai
+741,Elektros įrangos įrengėjai ir taisytojai
+7411,Pastatų ir kitokie elektrikai
+7412,Elektromechanikai ir elektromonteriai
+7413,Elektros linijų įrengėjai ir taisytojai
+742,Elektroninės ir telekomunikacijų įrangos įrengėjai ir taisytojai
+7421,Elektroninės įrangos mechanikai ir taisytojai
+7422,Informacinių technologijų ir ryšių sistemų įrengėjai ir taisytojai
+75,"Maisto gamintojai, medienos meistrai, siuvėjai ir kiti giminiškų profesijų darbininkai ir amatininkai"
+751,Maisto gamintojai ir giminiškų profesijų darbininkai
+7511,"Mėsininkai, žuvų darinėtojai ir giminiškų profesijų darbininkai"
+7512,Kepėjai ir konditeriai
+7513,Pieno produktų gamintojai
+7514,"Vaisių, daržovių ir panašių produktų konservuotojai"
+7515,Maisto produktų ir gėrimų degustatoriai ir rūšiuotojai
+7516,Tabako ruošėjai ir tabako gaminių gamintojai
+752,"Medienos meistrai, baldžiai ir giminiškų profesijų darbininkai"
+7521,Medienos meistrai
+7522,Baldžiai ir giminiškų profesijų darbininkai
+7523,Medienos apdirbimo staklių derintojai ir operatoriai
+753,Siuvėjai ir giminiškų profesijų darbininkai
+7531,"Siuvėjai, kailininkai ir kepurininkai"
+7532,Drabužių ir kitų gaminių sukirpėjai
+7533,Siuvinėtojai ir giminiškų profesijų darbininkai
+7534,Baldų apmušėjai ir giminiškų profesijų darbininkai
+7535,Kailiadirbiai ir odininkai
+7536,Batsiuviai ir giminiškų profesijų darbininkai
+754,Kiti kvalifikuoti darbininkai ir amatininkai
+7541,Narai
+7542,Sprogdintojai
+7543,Produktų rūšiuotojai ir bandytojai (išskyrus maisto produktų ir gėrimų degustatorius ir rūšiuotojus)
+7544,Fumigaciją atliekantys darbuotojai ir kiti kenkėjų ir piktžolių naikintojai
+7549,Kitur nepriskirti kvalifikuoti darbininkai ir amatininkai
+8,Įrenginių ir mašinų operatoriai ir surinkėjai
+81,Stacionariųjų įrenginių ir mašinų operatoriai
+811,Kasybos ir rūdų apdorojimo įrenginių operatoriai
+8111,Kalnakasiai ir kasybos įrenginių operatoriai
+8112,Mineralų ir uolienų apdorojimo įrenginių operatoriai
+8113,Gręžinių gręžėjai ir giminiškų profesijų darbininkai
+8114,"Cemento gamybos, akmens ir kitos mineralinės žaliavos apdirbimo mašinų operatoriai"
+812,Metalų apdirbimo ir poliravimo įrenginių operatoriai
+8121,Metalų perdirbimo ir apdorojimo įrenginių operatoriai
+8122,"Metalų poliravimo, elektrolitinio ir kitokio metalų paviršiaus dengimo įrenginių operatoriai"
+813,Chemijos ir fotografijos gaminių gamybos įrenginių ir mašinų operatoriai
+8131,Cheminių gaminių gamybos įrenginių ir mašinų operatoriai
+8132,Fotografijos gaminių gamybos mašinų operatoriai
+814,"Guminių, plastikinių ir popierinių gaminių gamybos mašinų operatoriai"
+8141,Guminių gaminių gamybos mašinų operatoriai
+8142,Plastikinių gaminių gamybos mašinų operatoriai
+8143,Popierinių gaminių gamybos mašinų operatoriai
+815,"Tekstilės, kailio ir odos gaminių gamybos mašinų operatoriai"
+8151,"Pluošto ruošimo, verpimo ir vijimo mašinų operatoriai"
+8152,Audimo ir mezgimo mašinų operatoriai
+8153,Siuvimo ir siuvinėjimo mašinų operatoriai
+8154,"Balinimo, dažymo ir valymo mašinų operatoriai"
+8155,Kailių ir odos išdirbimo mašinų operatoriai
+8156,Avalynės ir panašių gaminių gamybos mašinų operatoriai
+8157,Skalbimo mašinų operatoriai
+8159,"Kitur nepriskirti tekstilės, kailio ir odos gaminių gamybos mašinų operatoriai"
+816,Maisto ir panašių produktų gamybos mašinų operatoriai
+8160,Maisto ir panašių produktų gamybos mašinų operatoriai
+817,Medienos apdirbimo ir popieriaus gamybos įrenginių operatoriai
+8171,Popieriaus plaušienos paruošimo ir popieriaus gamybos įrenginių operatoriai
+8172,Medienos apdirbimo įrenginių operatoriai
+818,Kiti stacionariųjų įrenginių ir mašinų operatoriai
+8181,Stiklo ir keramikos gamybos įrenginių operatoriai
+8182,Garo variklių ir katilų operatoriai
+8183,"Pakavimo, pilstymo į butelius ir ženklinimo (etiketėmis) operatoriai"
+8189,Kitur nepriskirti stacionariųjų įrenginių ir mašinų operatoriai
+82,Surinkėjai
+821,Surinkėjai
+8211,Mechaninių mašinų surinkėjai
+8212,Elektrinės ir elektroninės įrangos surinkėjai
+8219,Kitur nepriskirti surinkėjai
+83,Vairuotojai ir judamųjų įrenginių operatoriai
+831,Lokomotyvų mašinistai ir giminiškų profesijų darbininkai
+8311,Lokomotyvų mašinistai
+8312,"Geležinkelio ratstabdininkai, signalizuotojai ir iešmininkai"
+832,"Lengvųjų automobilių, furgonų ir motociklų vairuotojai"
+8321,Motociklų vairuotojai
+8322,"Lengvųjų automobilių, taksi ir furgonų vairuotojai"
+833,Sunkiasvorių sunkvežimių ir autobusų vairuotojai
+8331,Autobusų ir troleibusų vairuotojai
+8332,Sunkiasvorių sunkvežimių ir krovinių transporto priemonių vairuotojai
+834,Judamųjų įrenginių operatoriai
+8341,Judamųjų žemės ir miškų ūkio įrenginių operatoriai
+8342,Žemės darbų ir panašių mašinų operatoriai
+8343,"Kranų, kėlimo įrenginių ir panašių mašinų operatoriai"
+8344,Krovininių platformų ir krautuvų operatoriai
+835,Laivų įgulų nariai ir giminiškų profesijų darbininkai
+8350,Laivų įgulų nariai ir giminiškų profesijų darbininkai
+9,Nekvalifikuoti darbininkai
+91,Valytojai ir pagalbininkai
+911,"Namų, viešbučių ir biurų valytojai, kambarinės ir pagalbininkai"
+9111,Namų valytojai ir pagalbininkai
+9112,"Biurų, viešbučių ir kitų įstaigų valytojai, kambarinės ir pagalbininkai"
+912,"Transporto priemonių ir langų plovėjai, skalbėjai ir kiti valytojai (rankomis)"
+9121,Skalbėjai ir lygintojai (rankomis)
+9122,Transporto priemonių plovėjai
+9123,Langų plovėjai
+9129,Kiti valytojai
+92,"Nekvalifikuoti žemės, miškų ir žuvininkystės ūkio darbininkai"
+921,"Nekvalifikuoti žemės, miškų ir žuvininkystės ūkio darbininkai"
+9211,Nekvalifikuoti augalininkystės ūkio darbininkai
+9212,Nekvalifikuoti gyvulininkystės ūkio darbininkai
+9213,Nekvalifikuoti mišriojo augalininkystės ir gyvulininkystės ūkio darbininkai
+9214,Nekvalifikuoti sodininkystės ir daržininkystės ūkio darbininkai
+9215,Nekvalifikuoti miškų ūkio darbininkai
+9216,Nekvalifikuoti žuvininkystės ir akvakultūros ūkio darbininkai
+93,"Nekvalifikuoti gavybos, statybos, pramonės ir transporto darbininkai"
+931,Nekvalifikuoti gavybos ir statybos darbininkai
+9311,Nekvalifikuoti gavybos ir karjerų eksploatavimo darbininkai
+9312,Nekvalifikuoti inžinerinių statinių statybos darbininkai
+9313,Nekvalifikuoti pastatų statybos darbininkai
+932,Nekvalifikuoti apdirbimo pramonės darbininkai
+9321,Pakuotojai (rankomis)
+9329,Kitur nepriskirti nekvalifikuoti apdirbimo pramonės darbininkai
+933,Nekvalifikuoti transporto ir sandėliavimo darbininkai
+9331,Rankinių ir pedalinių transporto priemonių vairuotojai
+9332,Traukiančių transporto priemones ir mašinas gyvulių vadeliotojai
+9333,Krovikai
+9334,Prekių krovėjai į lentynas
+94,Maisto ruošimo padėjėjai
+941,Maisto ruošimo padėjėjai
+9411,Greitojo maisto ruošėjai
+9412,Virtuvės pagalbininkai
+95,"Gatvės pardavėjai, gatvėje teikiamų paslaugų teikėjai"
+951,Gatvėje teikiamų paslaugų teikėjai
+9510,Gatvėje teikiamų paslaugų teikėjai
+952,Ne maisto produktų gatvės pardavėjai
+9520,Ne maisto produktų gatvės pardavėjai
+96,Buitinių atliekų surinkėjai ir kiti nekvalifikuoti darbininkai
+961,Buitinių atliekų surinkėjai
+9611,Buitinių atliekų surinkėjai
+9612,Buitinių atliekų rūšiuotojai
+9613,Kiemsargiai ir giminiškų profesijų darbininkai
+962,Kiti nekvalifikuoti darbininkai
+9621,"Kurjeriai, pasiuntiniai ir bagažo nešikai"
+9622,Nekvalifikuoti atsitiktinių darbų darbininkai
+9623,Pinigų iš automatų surinkėjai ir matuoklių rodmenų tikrintojai
+9624,Vandens vežikai ir malkų rinkėjai
+9629,Kitur nepriskirti nekvalifikuoti darbininkai
+0,Ginkluotųjų pajėgų profesijos
+1,"Ginkluotųjų pajėgų karininkai, generolai ir admirolai"
+11,"Ginkluotųjų pajėgų karininkai, generolai ir admirolai"
+110,"Ginkluotųjų pajėgų karininkai, generolai ir admirolai"
+2,"Ginkluotųjų pajėgų puskarininkiai, seržantai ir viršilos"
+21,"Ginkluotųjų pajėgų puskarininkiai, seržantai ir viršilos"
+210,"Ginkluotųjų pajėgų puskarininkiai, seržantai ir viršilos"
+3,"Ginkluotųjų pajėgų profesijos, kiti laipsniai"
+31,"Ginkluotųjų pajėgų profesijos, kiti laipsniai"
+310,"Ginkluotųjų pajėgų profesijos, kiti laipsniai"
