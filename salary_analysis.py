@@ -1,5 +1,5 @@
 import pandas as pd
-from sklearn.compose import ColumnTransformer, make_column_transformer
+from sklearn.compose import ColumnTransformer
 
 # from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.impute import SimpleImputer
@@ -74,7 +74,7 @@ def prepare_data(data):
     return train_test_split(X, y, test_size=0.3)
 
 
-def preprocese():
+def create_preprocessor():
     cat_features = ["lytis"]
     cat_transformer = Pipeline(steps=[("ohe", OneHotEncoder(handle_unknown="ignore"))])
 
@@ -93,10 +93,10 @@ def preprocese():
 
 
 def find_best_model_parameters(X_train, X_test, y_train, y_test):
-    preprocessed = preprocese()
+    preprocesor = create_preprocessor()
     pipeline = Pipeline(
         [
-            ("preprocessor", preprocessed),
+            ("preprocessor", preprocesor),
             ("pol", PolynomialFeatures(degree=3)),
             ("lin", LinearRegression()),
         ]
@@ -109,7 +109,6 @@ def find_best_model_parameters(X_train, X_test, y_train, y_test):
 
     grid_search = GridSearchCV(pipeline, parameters, n_jobs=-1, cv=3)
     grid_search.fit(X_train, y_train)
-    grid_search.score(X_test, y_test)
 
     x = pd.DataFrame(grid_search.cv_results_)
     x = x.set_index("rank_test_score")
@@ -119,6 +118,7 @@ def find_best_model_parameters(X_train, X_test, y_train, y_test):
 
 if __name__ == "__main__":
     data = load_data()
+
     X_train, X_test, y_train, y_test = prepare_data(data)
     print("Train test splitted")
     model = create_model()
@@ -137,5 +137,5 @@ if __name__ == "__main__":
     print(r)
 
     best_parameters = find_best_model_parameters(X_train, X_test, y_train, y_test)
-    print("best parameters":)
+    print("best parameters:")
     print(best_parameters)
