@@ -135,14 +135,10 @@ def find_best_model_parameters(X_train, X_test, y_train, y_test):
 
 def add_external_data(org_df, ext_df):
     """Function adds profession description data to original dataframe based on profession number"""
-    proffesions_list = []
-    for ind in org_df.index:
-        proffesions_list.append(
-            ext_df.loc[
-                ext_df["Kodas"] == org_df["profesija"][ind], "Pavadinimas"
-            ].item()
-        )
-    return org_df.assign(profesijos_apibudinimas=proffesions_list)
+    profession_names = org_df["profesija"].map(
+        ext_df.drop_duplicates("Kodas").set_index("Kodas")["Pavadinimas"]
+    )
+    return org_df.assign(profesijos_apibudinimas=profession_names)
 
 
 if __name__ == "__main__":
