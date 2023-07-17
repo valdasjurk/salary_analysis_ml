@@ -27,22 +27,10 @@ def load_external_data(path=EXTERNAL_DATA_PATH):
     return pd.read_csv(path)
 
 
-def create_model():
-    cat_features = ["lytis"]
-    cat_transformer = make_pipeline(OneHotEncoder(handle_unknown="ignore"))
-
-    num_features = ["profesija", "stazas", "darbo_laiko_dalis"]
-    num_transformer = make_pipeline(SimpleImputer(strategy="most_frequent"))
-
-    preprocessor = ColumnTransformer(
-        transformers=[
-            ("num", num_transformer, num_features),
-            ("cat", cat_transformer, cat_features),
-        ]
-    )
-    model = make_pipeline(
-        preprocessor, PolynomialFeatures(degree=3), LinearRegression()
-    )
+def create_lr_model():
+    """Function creates LinearRegression model"""
+    preprocesor = create_preprocessor()
+    model = make_pipeline(preprocesor, PolynomialFeatures(degree=3), LinearRegression())
     return model
 
 
@@ -163,7 +151,7 @@ if __name__ == "__main__":
     data = add_external_data(data, data_ext)
     X_train, X_test, y_train, y_test = prepare_data(data)
     print("Train test splitted")
-    model = create_model()
+    model = create_lr_model()
     print(model)
     model.fit(X_train, y_train)
     print("FITTED")
