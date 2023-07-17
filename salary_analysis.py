@@ -4,7 +4,7 @@ import seaborn as sns
 import pandas as pd
 from sklearn.compose import ColumnTransformer
 
-# from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import GridSearchCV, ParameterGrid, train_test_split
@@ -46,6 +46,13 @@ def create_model():
     return model
 
 
+def create_rfr_model():
+    """Function creates RandomForestRegressor model"""
+    preprocesor = create_preprocessor()
+    model = make_pipeline(preprocesor, RandomForestRegressor())
+    return model
+
+
 def predict_salary(
     model, sex: str, profession_name: str, experience: float, workload: float
 ):
@@ -78,7 +85,7 @@ def plot_predictions(data):
     sns.scatterplot(
         x="stazas",
         y="predictions",
-        data=r,
+        data=data,
         hue="lytis",
         size="darbo_laiko_dalis",
         palette=["red", "blue"],
@@ -163,7 +170,13 @@ if __name__ == "__main__":
     prediction = model.predict(X_test)
     print("prediction")
     score = model.score(X_test, y_test)
-    print(score)
+    print("LinearRegression: ", score)
+
+    model2 = create_rfr_model()
+    model2.fit(X_train, y_train)
+    y_pred = model2.predict(X_test)
+    score2 = model2.score(X_test, y_test)
+    print("RandomForestRegressor score: ", score2)
 
     scenarios = create_testing_scenarios()
     print(scenarios)
