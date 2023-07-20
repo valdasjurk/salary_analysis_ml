@@ -16,6 +16,11 @@ sys.stdout.reconfigure(encoding="utf-8")
 DATA_PATH = "https://get.data.gov.lt/datasets/gov/lsd/darbo_uzmokestis/DarboUzmokestis2018/:format/csv"
 EXTERNAL_DATA_PATH = "data/raw/profesijos.csv"
 SALARY_DATASET_MAX_ROWS = 5000
+TEST_SIZE = 0.3
+XCOLS = ["lytis", "profesija", "stazas", "darbo_laiko_dalis", "amzius"]
+YCOLS = "dbu_metinis"
+NUM_FEATURES = ["profesija", "stazas", "darbo_laiko_dalis"]
+CAT_FEATURES = ["lytis"]
 
 
 def load_lithuanian_salary_data():
@@ -88,31 +93,29 @@ def plot_predictions(data):
 
 def split_data_to_xy(data):
     X, y = (
-        data[["lytis", "profesija", "stazas", "darbo_laiko_dalis", "amzius"]],
-        data["dbu_metinis"],
+        data[XCOLS],
+        data[YCOLS],
     )
-    return train_test_split(X, y, test_size=0.3)
+    return X, y
 
 
 def create_preprocessor():
-    cat_features = ["lytis"]
     cat_transformer = Pipeline(steps=[("ohe", OneHotEncoder(handle_unknown="ignore"))])
 
-    num_features = ["profesija", "stazas", "darbo_laiko_dalis"]
     num_transformer = Pipeline(
         steps=[("imputer", SimpleImputer(strategy="most_frequent"))]
     )
 
     preprocessor = ColumnTransformer(
         transformers=[
-            ("num", num_transformer, num_features),
-            ("cat", cat_transformer, cat_features),
+            ("num", num_transformer, NUM_FEATURES),
+            ("cat", cat_transformer, CAT_FEATURES),
         ]
     )
     return preprocessor
 
 
-def find_best_model_parameters(X_train, X_test, y_train, y_test):
+def find_best_model_parameters(X_train, y_train):
     preprocesor = create_preprocessor()
     pipeline = Pipeline(
         [
@@ -133,7 +136,7 @@ def find_best_model_parameters(X_train, X_test, y_train, y_test):
     x = pd.DataFrame(grid_search.cv_results_)
     x = x.set_index("rank_test_score")
     x = x.sort_index()
-    return x.loc[:, "param_pol__degree":"param_preprocessor__num__imputer__strategy"]
+    return x.loc[:, x.columns[4] : x.columns[-7]]
 
 
 def add_profession_code_data_to_salary_df(org_df, ext_df):
@@ -149,8 +152,10 @@ if __name__ == "__main__":
     data_ext = load_profession_code_data()
     data = add_profession_code_data_to_salary_df(data, data_ext)
 
-    X_train, X_test, y_train, y_test = split_data_to_xy(data)
+    X, y = split_data_to_xy(data)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=TEST_SIZE)
     print("Train test splitted")
+
     model = create_lr_model()
     print(model)
     model.fit(X_train, y_train)
@@ -175,6 +180,6 @@ if __name__ == "__main__":
     img = plot_predictions(r)
     img.show()
 
-    best_parameters = find_best_model_parameters(X_train, X_test, y_train, y_test)
+    best_parameters = find_best_model_parameters(X_train, y_train)
     print("best parameters:")
     print(best_parameters)
