@@ -115,7 +115,9 @@ def create_preprocessor() -> ColumnTransformer:
     return preprocessor
 
 
-def find_best_model_parameters(X_train: pd.DataFrame, y_train: pd.DataFrame):
+def create_pipeline_and_parameters_for_gridsearchcv(
+    X_train: pd.DataFrame, y_train: pd.DataFrame
+):
     preprocesor = create_preprocessor()
     pipeline = Pipeline(
         [
@@ -124,19 +126,19 @@ def find_best_model_parameters(X_train: pd.DataFrame, y_train: pd.DataFrame):
             ("lin", LinearRegression()),
         ]
     )
-
     parameters = {
         "preprocessor__num__imputer__strategy": ["most_frequent", "mean"],
         "pol__degree": [1, 2, 3, 4, 5],
     }
 
-    grid_search = GridSearchCV(pipeline, parameters, n_jobs=-1, cv=3)
-    grid_search.fit(X_train, y_train)
+    return pipeline, parameters
 
-    x = pd.DataFrame(grid_search.cv_results_)
-    x = x.set_index("rank_test_score")
-    x = x.sort_index()
-    return x.loc[:, x.columns[4] : x.columns[-7]]
+
+def transform_cv_results(cv_results: dict) -> pd.DataFrame:
+    df = pd.DataFrame(cv_results)
+    df = df.set_index("rank_test_score")
+    df = df.sort_index()
+    return df.loc[:, df.columns[4] : df.columns[-7]]
 
 
 def add_profession_code_data_to_salary_df(
@@ -182,6 +184,15 @@ if __name__ == "__main__":
     img = plot_predictions(r)
     img.show()
 
-    best_parameters = find_best_model_parameters(X_train, y_train)
+    (
+        gridsearchcv_pipeline,
+        gridsearchcv_parameters,
+    ) = create_pipeline_and_parameters_for_gridsearchcv(X_train, y_train)
+    grid_search = GridSearchCV(
+        gridsearchcv_pipeline, gridsearchcv_parameters, n_jobs=-1, cv=3
+    )
+    grid_search.fit(X_train, y_train)
+    cv_results = grid_search.cv_results_
+    best_parameters = transform_cv_results(cv_results)
     print("best parameters:")
     print(best_parameters)
