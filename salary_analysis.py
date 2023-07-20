@@ -23,7 +23,7 @@ NUM_FEATURES = ["profesija", "stazas", "darbo_laiko_dalis"]
 CAT_FEATURES = ["lytis"]
 
 
-def load_lithuanian_salary_data():
+def load_lithuanian_salary_data() -> pd.DataFrame:
     data = pd.read_csv(DATA_PATH)
     data = data.drop(columns=["_type", "_revision"], axis=1)
     if SALARY_DATASET_MAX_ROWS:
@@ -31,18 +31,18 @@ def load_lithuanian_salary_data():
     return data
 
 
-def load_profession_code_data(path=EXTERNAL_DATA_PATH):
+def load_profession_code_data(path=EXTERNAL_DATA_PATH) -> pd.DataFrame:
     return pd.read_csv(path)
 
 
-def create_lr_model():
+def create_lr_model() -> Pipeline:
     """Function creates LinearRegression model"""
     preprocesor = create_preprocessor()
     model = make_pipeline(preprocesor, PolynomialFeatures(degree=3), LinearRegression())
     return model
 
 
-def create_rfr_model():
+def create_rfr_model() -> Pipeline:
     """Function creates RandomForestRegressor model"""
     preprocesor = create_preprocessor()
     model = make_pipeline(preprocesor, RandomForestRegressor())
@@ -51,7 +51,7 @@ def create_rfr_model():
 
 def predict_salary(
     model, sex: str, profession_name: str, experience: float, workload: float
-):
+) -> dict:
     """Sex = [M, F] , profession_name = gydytojas, experience in years, workload in percentage 0-100%"""
     profession_dict = {"administratorius": 334}
     data = {
@@ -66,7 +66,7 @@ def predict_salary(
     return result
 
 
-def create_testing_scenarios(experience_year=[1, 31]):
+def create_testing_scenarios(experience_year=[1, 31]) -> pd.DataFrame:
     exp_year_start, exp_year_end = experience_year
     param_grid = {
         "lytis": ["F", "M"],
@@ -77,7 +77,7 @@ def create_testing_scenarios(experience_year=[1, 31]):
     return pd.DataFrame(ParameterGrid(param_grid))
 
 
-def plot_predictions(data):
+def plot_predictions(data: pd.DataFrame):
     sns.scatterplot(
         x="stazas",
         y="predictions",
@@ -91,7 +91,7 @@ def plot_predictions(data):
     return plt
 
 
-def split_data_to_xy(data):
+def split_data_to_xy(data: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
     X, y = (
         data[XCOLS],
         data[YCOLS],
@@ -99,7 +99,7 @@ def split_data_to_xy(data):
     return X, y
 
 
-def create_preprocessor():
+def create_preprocessor() -> ColumnTransformer:
     cat_transformer = Pipeline(steps=[("ohe", OneHotEncoder(handle_unknown="ignore"))])
 
     num_transformer = Pipeline(
@@ -115,7 +115,7 @@ def create_preprocessor():
     return preprocessor
 
 
-def find_best_model_parameters(X_train, y_train):
+def find_best_model_parameters(X_train: pd.DataFrame, y_train: pd.DataFrame):
     preprocesor = create_preprocessor()
     pipeline = Pipeline(
         [
@@ -139,7 +139,9 @@ def find_best_model_parameters(X_train, y_train):
     return x.loc[:, x.columns[4] : x.columns[-7]]
 
 
-def add_profession_code_data_to_salary_df(org_df, ext_df):
+def add_profession_code_data_to_salary_df(
+    org_df: pd.DataFrame, ext_df: pd.DataFrame
+) -> pd.DataFrame:
     """Function adds profession description data to original dataframe based on profession number"""
     profession_names = org_df["profesija"].map(
         ext_df.drop_duplicates("Kodas").set_index("Kodas")["Pavadinimas"]
