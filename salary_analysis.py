@@ -15,15 +15,18 @@ sys.stdout.reconfigure(encoding="utf-8")
 
 DATA_PATH = "https://get.data.gov.lt/datasets/gov/lsd/darbo_uzmokestis/DarboUzmokestis2018/:format/csv"
 EXTERNAL_DATA_PATH = "data/raw/profesijos.csv"
+SALARY_DATASET_MAX_ROWS = 5000
 
 
-def load_data():
+def load_lithuanian_salary_data():
     data = pd.read_csv(DATA_PATH)
     data = data.drop(columns=["_type", "_revision"], axis=1)
-    return data.head(5000)
+    if SALARY_DATASET_MAX_ROWS:
+        return data.head(SALARY_DATASET_MAX_ROWS)
+    return data
 
 
-def load_external_data(path=EXTERNAL_DATA_PATH):
+def load_profession_code_data(path=EXTERNAL_DATA_PATH):
     return pd.read_csv(path)
 
 
@@ -83,9 +86,9 @@ def plot_predictions(data):
     return plt
 
 
-def prepare_data(data):
+def split_data_to_xy(data):
     X, y = (
-        data[["lytis", "profesija", "stazas", "darbo_laiko_dalis"]],
+        data[["lytis", "profesija", "stazas", "darbo_laiko_dalis", "amzius"]],
         data["dbu_metinis"],
     )
     return train_test_split(X, y, test_size=0.3)
@@ -133,7 +136,7 @@ def find_best_model_parameters(X_train, X_test, y_train, y_test):
     return x.loc[:, "param_pol__degree":"param_preprocessor__num__imputer__strategy"]
 
 
-def add_external_data(org_df, ext_df):
+def add_profession_code_data_to_salary_df(org_df, ext_df):
     """Function adds profession description data to original dataframe based on profession number"""
     profession_names = org_df["profesija"].map(
         ext_df.drop_duplicates("Kodas").set_index("Kodas")["Pavadinimas"]
@@ -142,10 +145,11 @@ def add_external_data(org_df, ext_df):
 
 
 if __name__ == "__main__":
-    data = load_data()
-    data_ext = load_external_data()
-    data = add_external_data(data, data_ext)
-    X_train, X_test, y_train, y_test = prepare_data(data)
+    data = load_lithuanian_salary_data()
+    data_ext = load_profession_code_data()
+    data = add_profession_code_data_to_salary_df(data, data_ext)
+
+    X_train, X_test, y_train, y_test = split_data_to_xy(data)
     print("Train test splitted")
     model = create_lr_model()
     print(model)
