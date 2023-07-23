@@ -1,9 +1,10 @@
 import sys
-import matplotlib.pyplot as plt
-import seaborn as sns
-import pandas as pd
-from sklearn.compose import ColumnTransformer
 
+import joblib
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LinearRegression
@@ -164,6 +165,7 @@ if __name__ == "__main__":
     print(model)
     model.fit(X_train, y_train)
     print("FITTED")
+    joblib.dump(model, "model.joblib")
     prediction = model.predict(X_test)
     print("prediction")
     score = model.score(X_test, y_test)
