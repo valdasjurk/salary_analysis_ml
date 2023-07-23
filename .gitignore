@@ -1,2 +1,4 @@
 pycache
 *.json
+*.pyc
+*.joblib
