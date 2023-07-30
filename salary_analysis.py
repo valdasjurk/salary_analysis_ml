@@ -11,6 +11,8 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import GridSearchCV, ParameterGrid, train_test_split
 from sklearn.pipeline import Pipeline, make_pipeline
 from sklearn.preprocessing import OneHotEncoder, PolynomialFeatures
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import AdaBoostRegressor
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -46,7 +48,32 @@ def create_lr_model() -> Pipeline:
 def create_rfr_model() -> Pipeline:
     """Function creates RandomForestRegressor model"""
     preprocesor = create_preprocessor()
-    model = make_pipeline(preprocesor, RandomForestRegressor())
+    model = make_pipeline(
+        preprocesor, RandomForestRegressor(n_estimators=10, max_depth=4)
+    )
+    return model
+
+
+def create_decision_tree_model():
+    preprocesor = create_preprocessor()
+    model = make_pipeline(
+        preprocesor, DecisionTreeRegressor(max_depth=4, min_samples_split=2)
+    )
+    return model
+
+
+def create_adaboost_model():
+    preprocesor = create_preprocessor()
+    model = make_pipeline(
+        preprocesor,
+        AdaBoostRegressor(
+            estimator=None,
+            n_estimators=10,
+            learning_rate=1.0,
+            # The loss function to use when updating the weights after each boosting iteration.
+            loss="linear",
+        ),
+    )
     return model
 
 
@@ -162,20 +189,30 @@ if __name__ == "__main__":
     print("Train test splitted")
 
     model = create_lr_model()
-    print(model)
     model.fit(X_train, y_train)
     print("FITTED")
     joblib.dump(model, "model.joblib")
     prediction = model.predict(X_test)
-    print("prediction")
     score = model.score(X_test, y_test)
-    print("LinearRegression: ", score)
+    print("LinearRegression score: ", score)
 
     model2 = create_rfr_model()
     model2.fit(X_train, y_train)
     y_pred = model2.predict(X_test)
     score2 = model2.score(X_test, y_test)
     print("RandomForestRegressor score: ", score2)
+
+    model3 = create_decision_tree_model()
+    model3.fit(X_train, y_train)
+    prediction3 = model3.predict(X_test)
+    score3 = model3.score(X_test, y_test)
+    print("DecisionTreeRegressor score: ", score3)
+
+    model_adb = create_adaboost_model()
+    model_adb.fit(X_train, y_train)
+    prediction_adb = model_adb.predict(X_test)
+    score_adb = model_adb.score(X_test, y_test)
+    print("AdaBoost score: ", score_adb)
 
     scenarios = create_testing_scenarios()
     print(scenarios)
