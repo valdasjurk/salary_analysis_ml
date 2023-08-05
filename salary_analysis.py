@@ -5,15 +5,14 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 from lightgbm import LGBMRegressor
-from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import AdaBoostRegressor, RandomForestRegressor
-from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import ParameterGrid, train_test_split
 from sklearn.pipeline import Pipeline, make_pipeline
-from sklearn.preprocessing import OneHotEncoder, PolynomialFeatures
+from sklearn.preprocessing import PolynomialFeatures
 from sklearn.tree import DecisionTreeRegressor
 from parameters_optimization import find_best_params_with_randomizedsearchcv
+from preprocessor import create_preprocessor
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -24,7 +23,7 @@ TEST_SIZE = 0.3
 XCOLS = ["lytis", "profesija", "stazas", "darbo_laiko_dalis", "amzius"]
 YCOLS = "dbu_metinis"
 NUM_FEATURES = ["profesija", "stazas", "darbo_laiko_dalis"]
-CAT_FEATURES = ["lytis"]
+CAT_FEATURES = ["lytis", "amzius"]
 
 
 def load_lithuanian_salary_data() -> pd.DataFrame:
@@ -140,22 +139,6 @@ def split_data_to_xy(data: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
         data[YCOLS],
     )
     return X, y
-
-
-def create_preprocessor() -> ColumnTransformer:
-    cat_transformer = Pipeline(steps=[("ohe", OneHotEncoder(handle_unknown="ignore"))])
-
-    num_transformer = Pipeline(
-        steps=[("imputer", SimpleImputer(strategy="most_frequent"))]
-    )
-
-    preprocessor = ColumnTransformer(
-        transformers=[
-            ("num", num_transformer, NUM_FEATURES),
-            ("cat", cat_transformer, CAT_FEATURES),
-        ]
-    )
-    return preprocessor
 
 
 def create_pipeline_and_parameters_for_gridsearchcv(
