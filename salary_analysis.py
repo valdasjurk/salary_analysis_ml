@@ -7,7 +7,7 @@ import seaborn as sns
 from lightgbm import LGBMRegressor
 from sklearn.ensemble import AdaBoostRegressor, RandomForestRegressor
 from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import ParameterGrid, train_test_split, GridSearchCV
+from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline, make_pipeline
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.tree import DecisionTreeRegressor
@@ -17,6 +17,7 @@ from parameters_optimization import (
     find_linear_regression_best_params,
 )
 from preprocessor import create_preprocessor
+from create_testing_scenarios import create_testing_scenarios, create_predictions_plot
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -119,32 +120,6 @@ def predict_salary(
     return result
 
 
-def create_testing_scenarios(experience_year=[1, 31]) -> pd.DataFrame:
-    exp_year_start, exp_year_end = experience_year
-    param_grid = {
-        "lytis": ["F", "M"],
-        "stazas": range(exp_year_start, exp_year_end, 3),
-        "darbo_laiko_dalis": range(50, 101, 25),
-        "profesija": [334],
-        "amzius": ["40-49"],
-    }
-    return pd.DataFrame(ParameterGrid(param_grid))
-
-
-def plot_predictions(data: pd.DataFrame):
-    sns.scatterplot(
-        x="stazas",
-        y="predictions",
-        data=data,
-        hue="lytis",
-        size="darbo_laiko_dalis",
-        palette=["red", "blue"],
-    )
-    plt.xlabel("Work experience, years")
-    plt.ylabel("Predicted yearly salary, eur")
-    return plt
-
-
 def split_data_to_xy(data: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
     X, y = (
         data[XCOLS],
@@ -192,11 +167,10 @@ if __name__ == "__main__":
 
     model = create_lr_model()
     model.fit(X_train, y_train)
-    print("FITTED")
-    joblib.dump(model, "model.joblib")
     prediction = model.predict(X_test)
     score = model.score(X_test, y_test)
     print("LinearRegression score: ", score)
+    joblib.dump(model, "model.joblib")
 
     model2 = create_rfr_model()
     model2.fit(X_train, y_train)
@@ -223,13 +197,12 @@ if __name__ == "__main__":
     print("LightGBM score: ", score_lgbm)
 
     scenarios = create_testing_scenarios()
-    print(scenarios)
     predictions = model.predict(scenarios)
-    r = scenarios.assign(predictions=predictions)
-    print(r)
-    img = plot_predictions(r)
+    predictions_df = scenarios.assign(predictions=predictions)
+    print(predictions_df)
+
+    img = create_predictions_plot(predictions_df)
     img.show()
 
     find_rfr_best_params_and_score(X_train, y_train, model2)
-
     find_linear_regression_best_params(X_train, y_train, model)
