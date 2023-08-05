@@ -18,29 +18,15 @@ from parameters_optimization import (
 )
 from preprocessor import create_preprocessor
 from create_testing_scenarios import create_testing_scenarios, create_predictions_plot
+from load_datasets import load_lithuanian_salary_data, load_profession_code_data
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-DATA_PATH = "https://get.data.gov.lt/datasets/gov/lsd/darbo_uzmokestis/DarboUzmokestis2018/:format/csv"
-EXTERNAL_DATA_PATH = "data/raw/profesijos.csv"
-SALARY_DATASET_MAX_ROWS = 5000
 TEST_SIZE = 0.3
 XCOLS = ["lytis", "profesija", "stazas", "darbo_laiko_dalis", "amzius"]
 YCOLS = "dbu_metinis"
 NUM_FEATURES = ["profesija", "stazas", "darbo_laiko_dalis"]
 CAT_FEATURES = ["lytis", "amzius"]
-
-
-def load_lithuanian_salary_data() -> pd.DataFrame:
-    data = pd.read_csv(DATA_PATH)
-    data = data.drop(columns=["_type", "_revision"], axis=1)
-    if SALARY_DATASET_MAX_ROWS:
-        return data.head(SALARY_DATASET_MAX_ROWS)
-    return data
-
-
-def load_profession_code_data(path=EXTERNAL_DATA_PATH) -> pd.DataFrame:
-    return pd.read_csv(path)
 
 
 def create_lr_model() -> Pipeline:
@@ -53,7 +39,6 @@ def create_lr_model() -> Pipeline:
             ("lin", LinearRegression()),
         ]
     )
-    # model = make_pipeline(preprocesor, PolynomialFeatures(degree=3), LinearRegression())
     return model
 
 
@@ -136,24 +121,6 @@ def add_profession_code_data_to_salary_df(
         ext_df.drop_duplicates("Kodas").set_index("Kodas")["Pavadinimas"]
     )
     return org_df.assign(profesijos_apibudinimas=profession_names)
-
-
-# def create_pipeline_and_parameters_for_gridsearchcv(
-#     X_train: pd.DataFrame, y_train: pd.DataFrame
-# ):
-#     preprocesor = create_preprocessor()
-#     pipeline = Pipeline(
-#         [
-#             ("preprocessor", preprocesor),
-#             ("pol", PolynomialFeatures(degree=3)),
-#             ("lin", LinearRegression()),
-#         ]
-#     )
-#     parameters = {
-#         "preprocessor__num__imputer__strategy": ["most_frequent", "mean"],
-#         "pol__degree": [1, 2, 3, 4, 5],
-#     }
-#     return pipeline, parameters
 
 
 if __name__ == "__main__":
