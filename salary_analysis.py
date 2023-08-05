@@ -4,15 +4,16 @@ import joblib
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
+from lightgbm import LGBMRegressor
 from sklearn.compose import ColumnTransformer
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import AdaBoostRegressor, RandomForestRegressor
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import GridSearchCV, ParameterGrid, train_test_split
+from sklearn.model_selection import ParameterGrid, train_test_split
 from sklearn.pipeline import Pipeline, make_pipeline
 from sklearn.preprocessing import OneHotEncoder, PolynomialFeatures
 from sklearn.tree import DecisionTreeRegressor
-from sklearn.ensemble import AdaBoostRegressor
+from parameters_optimization import find_best_params_with_randomizedsearchcv
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -48,13 +49,16 @@ def create_lr_model() -> Pipeline:
 def create_rfr_model() -> Pipeline:
     """Function creates RandomForestRegressor model"""
     preprocesor = create_preprocessor()
-    model = make_pipeline(
-        preprocesor, RandomForestRegressor(n_estimators=10, max_depth=4)
+    model = Pipeline(
+        [
+            ("preprocessor", preprocesor),
+            ("rfr", RandomForestRegressor(n_estimators=10, max_depth=4)),
+        ]
     )
     return model
 
 
-def create_decision_tree_model():
+def create_decision_tree_model() -> Pipeline:
     preprocesor = create_preprocessor()
     model = make_pipeline(
         preprocesor, DecisionTreeRegressor(max_depth=4, min_samples_split=2)
@@ -62,7 +66,7 @@ def create_decision_tree_model():
     return model
 
 
-def create_adaboost_model():
+def create_adaboost_model() -> Pipeline:
     preprocesor = create_preprocessor()
     model = make_pipeline(
         preprocesor,
@@ -72,6 +76,17 @@ def create_adaboost_model():
             learning_rate=1.0,
             # The loss function to use when updating the weights after each boosting iteration.
             loss="linear",
+        ),
+    )
+    return model
+
+
+def create_lgbm_model() -> Pipeline:
+    preprocesor = create_preprocessor()
+    model = make_pipeline(
+        preprocesor,
+        LGBMRegressor(
+            num_leaves=31, max_depth=-1, learning_rate=0.1, n_estimators=5, n_jobs=-1
         ),
     )
     return model
@@ -158,7 +173,6 @@ def create_pipeline_and_parameters_for_gridsearchcv(
         "preprocessor__num__imputer__strategy": ["most_frequent", "mean"],
         "pol__degree": [1, 2, 3, 4, 5],
     }
-
     return pipeline, parameters
 
 
@@ -213,6 +227,14 @@ if __name__ == "__main__":
     prediction_adb = model_adb.predict(X_test)
     score_adb = model_adb.score(X_test, y_test)
     print("AdaBoost score: ", score_adb)
+
+    model_lgbm = create_lgbm_model()
+    model_lgbm.fit(X_train, y_train)
+    prediction_lgbm = model_lgbm.predict(X_test)
+    score_lgbm = model_lgbm.score(X_test, y_test)
+    print("LightGBM score: ", score_lgbm)
+
+    find_best_params_with_randomizedsearchcv(X_train, y_train, model2)
 
     scenarios = create_testing_scenarios()
     print(scenarios)
