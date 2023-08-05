@@ -7,11 +7,15 @@ import seaborn as sns
 from lightgbm import LGBMRegressor
 from sklearn.ensemble import AdaBoostRegressor, RandomForestRegressor
 from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import ParameterGrid, train_test_split
+from sklearn.model_selection import ParameterGrid, train_test_split, GridSearchCV
 from sklearn.pipeline import Pipeline, make_pipeline
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.tree import DecisionTreeRegressor
-from parameters_optimization import find_best_params_with_randomizedsearchcv
+
+from parameters_optimization import (
+    find_rfr_best_params_and_score,
+    find_linear_regression_best_params,
+)
 from preprocessor import create_preprocessor
 
 sys.stdout.reconfigure(encoding="utf-8")
@@ -41,7 +45,14 @@ def load_profession_code_data(path=EXTERNAL_DATA_PATH) -> pd.DataFrame:
 def create_lr_model() -> Pipeline:
     """Function creates LinearRegression model"""
     preprocesor = create_preprocessor()
-    model = make_pipeline(preprocesor, PolynomialFeatures(degree=3), LinearRegression())
+    model = Pipeline(
+        [
+            ("preprocessor", preprocesor),
+            ("pol", PolynomialFeatures(degree=3)),
+            ("lin", LinearRegression()),
+        ]
+    )
+    # model = make_pipeline(preprocesor, PolynomialFeatures(degree=3), LinearRegression())
     return model
 
 
@@ -115,6 +126,7 @@ def create_testing_scenarios(experience_year=[1, 31]) -> pd.DataFrame:
         "stazas": range(exp_year_start, exp_year_end, 3),
         "darbo_laiko_dalis": range(50, 101, 25),
         "profesija": [334],
+        "amzius": ["40-49"],
     }
     return pd.DataFrame(ParameterGrid(param_grid))
 
@@ -141,31 +153,6 @@ def split_data_to_xy(data: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
     return X, y
 
 
-def create_pipeline_and_parameters_for_gridsearchcv(
-    X_train: pd.DataFrame, y_train: pd.DataFrame
-):
-    preprocesor = create_preprocessor()
-    pipeline = Pipeline(
-        [
-            ("preprocessor", preprocesor),
-            ("pol", PolynomialFeatures(degree=3)),
-            ("lin", LinearRegression()),
-        ]
-    )
-    parameters = {
-        "preprocessor__num__imputer__strategy": ["most_frequent", "mean"],
-        "pol__degree": [1, 2, 3, 4, 5],
-    }
-    return pipeline, parameters
-
-
-def transform_cv_results(cv_results: dict) -> pd.DataFrame:
-    df = pd.DataFrame(cv_results)
-    df = df.set_index("rank_test_score")
-    df = df.sort_index()
-    return df.loc[:, df.columns[4] : df.columns[-7]]
-
-
 def add_profession_code_data_to_salary_df(
     org_df: pd.DataFrame, ext_df: pd.DataFrame
 ) -> pd.DataFrame:
@@ -174,6 +161,24 @@ def add_profession_code_data_to_salary_df(
         ext_df.drop_duplicates("Kodas").set_index("Kodas")["Pavadinimas"]
     )
     return org_df.assign(profesijos_apibudinimas=profession_names)
+
+
+# def create_pipeline_and_parameters_for_gridsearchcv(
+#     X_train: pd.DataFrame, y_train: pd.DataFrame
+# ):
+#     preprocesor = create_preprocessor()
+#     pipeline = Pipeline(
+#         [
+#             ("preprocessor", preprocesor),
+#             ("pol", PolynomialFeatures(degree=3)),
+#             ("lin", LinearRegression()),
+#         ]
+#     )
+#     parameters = {
+#         "preprocessor__num__imputer__strategy": ["most_frequent", "mean"],
+#         "pol__degree": [1, 2, 3, 4, 5],
+#     }
+#     return pipeline, parameters
 
 
 if __name__ == "__main__":
@@ -217,26 +222,14 @@ if __name__ == "__main__":
     score_lgbm = model_lgbm.score(X_test, y_test)
     print("LightGBM score: ", score_lgbm)
 
-    find_best_params_with_randomizedsearchcv(X_train, y_train, model2)
-
     scenarios = create_testing_scenarios()
     print(scenarios)
     predictions = model.predict(scenarios)
     r = scenarios.assign(predictions=predictions)
     print(r)
-
     img = plot_predictions(r)
     img.show()
 
-    (
-        gridsearchcv_pipeline,
-        gridsearchcv_parameters,
-    ) = create_pipeline_and_parameters_for_gridsearchcv(X_train, y_train)
-    grid_search = GridSearchCV(
-        gridsearchcv_pipeline, gridsearchcv_parameters, n_jobs=-1, cv=3
-    )
-    grid_search.fit(X_train, y_train)
-    cv_results = grid_search.cv_results_
-    best_parameters = transform_cv_results(cv_results)
-    print("best parameters:")
-    print(best_parameters)
+    find_rfr_best_params_and_score(X_train, y_train, model2)
+
+    find_linear_regression_best_params(X_train, y_train, model)
