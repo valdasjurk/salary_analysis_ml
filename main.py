@@ -19,6 +19,8 @@ from parameters_optimization import (
 from preprocessor import create_preprocessor
 from create_testing_scenarios import create_testing_scenarios, create_predictions_plot
 from load_datasets import load_lithuanian_salary_data, load_profession_code_data
+from sklearn.decomposition import PCA
+from sklearn.feature_selection import VarianceThreshold
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -106,14 +108,27 @@ def add_profession_code_data_to_salary_df(
     return org_df.assign(profesijos_apibudinimas=profession_names)
 
 
+def remove_low_variance_features() -> Pipeline:
+    preprocesor = create_preprocessor()
+    model = Pipeline(
+        [
+            ("preprocessor", preprocesor),
+            ("rfr", VarianceThreshold(threshold=0.1)),
+        ]
+    )
+    return model
+
+
 if __name__ == "__main__":
     data = load_lithuanian_salary_data()
     data_ext = load_profession_code_data()
-    data = add_profession_code_data_to_salary_df(data, data_ext)
 
     X, y = split_data_to_xy(data)
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=TEST_SIZE)
     print("Train test splitted")
+
+    var_thr = remove_low_variance_features()
+    var_thr.fit_transform(X_train)
 
     model = create_lr_model()
     model.fit(X_train, y_train)
