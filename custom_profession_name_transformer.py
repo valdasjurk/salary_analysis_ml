@@ -34,3 +34,30 @@ class ProfessionTransformer(BaseEstimator, TransformerMixin):
             ),
         )
         return transformed_X
+
+
+def test_stuff():
+    a = ProfessionTransformer()
+    import pandas as pd
+    from pandas.testing import assert_frame_equal
+
+    df = pd.DataFrame({"profesija": [324]})
+    assert_frame_equal(
+        a.transform(df),
+        pd.DataFrame(
+            [
+                [
+                    324,
+                    "Veterinarijos technikai ir felčeriai",
+                    "Jaunesnieji sveikatos specialistai",
+                    "Technikai ir jaunesnieji specialistai",
+                ]
+            ],
+            columns=[
+                "profesija",
+                "profesijos_apibudinimas",
+                "profesijos_apibudinimas_2",
+                "profesijos_apibudinimas_3",
+            ],
+        ),
+    )
