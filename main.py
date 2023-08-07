@@ -25,10 +25,16 @@ from sklearn.feature_selection import VarianceThreshold
 sys.stdout.reconfigure(encoding="utf-8")
 
 TEST_SIZE = 0.3
-XCOLS = ["lytis", "profesija", "stazas", "darbo_laiko_dalis", "amzius"]
+XCOLS = [
+    "lytis",
+    "amzius",
+    "profesija",
+    "issilavinimas",
+    "stazas",
+    "darbo_laiko_dalis",
+    "svoris",
+]
 YCOLS = "dbu_metinis"
-NUM_FEATURES = ["profesija", "stazas", "darbo_laiko_dalis"]
-CAT_FEATURES = ["lytis", "amzius"]
 
 
 def create_lr_model() -> Pipeline:
@@ -161,13 +167,13 @@ if __name__ == "__main__":
     score_lgbm = model_lgbm.score(X_test, y_test)
     print("LightGBM score: ", score_lgbm)
 
-    scenarios = create_testing_scenarios()
-    predictions = model.predict(scenarios)
-    predictions_df = scenarios.assign(predictions=predictions)
-    print(predictions_df)
+    # scenarios = create_testing_scenarios()
+    # predictions = model.predict(scenarios)
+    # predictions_df = scenarios.assign(predictions=predictions)
+    # print(predictions_df)
 
-    img = create_predictions_plot(predictions_df)
-    img.show()
+    # img = create_predictions_plot(predictions_df)
+    # img.show()
 
-    find_rfr_best_params_and_score(X_train, y_train, model2)
-    find_linear_regression_best_params(X_train, y_train, model)
+    # find_rfr_best_params_and_score(X_train, y_train, model2)
+    # find_linear_regression_best_params(X_train, y_train, model)
