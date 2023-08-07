@@ -5,7 +5,7 @@ from sklearn.preprocessing import OneHotEncoder
 from custom_profession_name_transformer import ProfessionTransformer
 
 NUM_FEATURES = ["profesija", "stazas", "darbo_laiko_dalis"]
-CAT_FEATURES = ["lytis", "amzius"]
+CAT_FEATURES = ["lytis", "amzius", "issilavinimas"]
 CUSTOM_FEATURES = ["profesija"]
 
 
