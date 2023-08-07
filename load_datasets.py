@@ -2,7 +2,7 @@ import pandas as pd
 
 DATA_PATH = "https://get.data.gov.lt/datasets/gov/lsd/darbo_uzmokestis/DarboUzmokestis2018/:format/csv"
 EXTERNAL_DATA_PATH = "data/raw/profesijos.csv"
-SALARY_DATASET_MAX_ROWS = 5000
+SALARY_DATASET_MAX_ROWS = 10000
 
 
 def load_lithuanian_salary_data() -> pd.DataFrame:
