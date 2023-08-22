@@ -1,4 +1,4 @@
-import sys
+import sys, io
 
 import joblib
 import matplotlib.pyplot as plt
@@ -23,7 +23,9 @@ from sklearn.decomposition import PCA
 from sklearn.feature_selection import VarianceThreshold
 import numpy as np
 
-sys.stdout.reconfigure(encoding="utf-8")
+if sys.platform == "win32":
+    if isinstance(sys.stdout, io.TextIOWrapper) and sys.version_info >= (3, 7):
+        sys.stdout.reconfigure(encoding="utf-8")
 
 TEST_SIZE = 0.3
 XCOLS = [
