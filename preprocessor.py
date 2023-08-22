@@ -15,11 +15,12 @@ def create_preprocessor() -> ColumnTransformer:
             ("ohe", OneHotEncoder(handle_unknown="ignore")),
         ]
     )
-    # cust_transformer = Pipeline(
-    #     steps=[
-    #         ("prof_name", ProfessionTransformer()),
-    #     ]
-    # )
+    cust_transformer = Pipeline(
+        steps=[
+            ("prof_name", ProfessionTransformer()),
+            ("ohe_cust", OneHotEncoder(handle_unknown="ignore")),
+        ]
+    )
     num_transformer = Pipeline(
         steps=[("imputer", SimpleImputer(strategy="most_frequent"))]
     )
@@ -27,8 +28,8 @@ def create_preprocessor() -> ColumnTransformer:
     preprocessor = ColumnTransformer(
         transformers=[
             ("num", num_transformer, NUM_FEATURES),
+            ("cust", cust_transformer, CUSTOM_FEATURES),
             ("cat", cat_transformer, CAT_FEATURES),
-            # ("cust", cust_transformer, CUSTOM_FEATURES),
         ]
     )
     return preprocessor
