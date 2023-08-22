@@ -21,6 +21,7 @@ from create_testing_scenarios import create_testing_scenarios, create_prediction
 from load_datasets import load_lithuanian_salary_data, load_profession_code_data
 from sklearn.decomposition import PCA
 from sklearn.feature_selection import VarianceThreshold
+import numpy as np
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -125,6 +126,33 @@ def remove_low_variance_features() -> Pipeline:
     return model
 
 
+def show_model_feature_importances(model, model_pipeline_name="rfr") -> pd.DataFrame:
+    preprocessor_steps = [
+        ["num", "imputer"],
+        ["cat", "ohe"],
+        ["cust", "ohe_cust"],
+    ]
+    col_names_list = np.array([])
+    for i in preprocessor_steps:
+        col_names = (
+            model.named_steps["preprocessor"]
+            .named_transformers_[i[0]][i[1]]
+            .get_feature_names_out()
+        )
+        col_names_list = np.append(col_names_list, col_names)
+
+    feature_importances = rfr_model.named_steps[
+        model_pipeline_name
+    ].feature_importances_
+
+    df = pd.DataFrame(
+        feature_importances,
+        index=col_names_list,
+    )
+    print(df)
+    return df
+
+
 if __name__ == "__main__":
     data = load_lithuanian_salary_data()
     data_ext = load_profession_code_data()
@@ -148,6 +176,7 @@ if __name__ == "__main__":
     y_pred = rfr_model.predict(X_test)
     score2 = rfr_model.score(X_test, y_test)
     print("RandomForestRegressor score: ", score2)
+    show_model_feature_importances(rfr_model)
 
     decision_tree_model = create_decision_tree_model()
     decision_tree_model.fit(X_train, y_train)
