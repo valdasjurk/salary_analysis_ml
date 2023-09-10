@@ -22,6 +22,7 @@ from load_datasets import load_lithuanian_salary_data, load_profession_code_data
 from sklearn.decomposition import PCA
 from sklearn.feature_selection import VarianceThreshold
 import numpy as np
+from torch_linear_regression import create_torch_lr_model_and_show_loss
 
 if sys.platform == "win32":
     if isinstance(sys.stdout, io.TextIOWrapper) and sys.version_info >= (3, 7):
@@ -178,6 +179,7 @@ if __name__ == "__main__":
     y_pred = rfr_model.predict(X_test)
     score2 = rfr_model.score(X_test, y_test)
     print("RandomForestRegressor score: ", score2)
+
     show_model_feature_importances(rfr_model)
 
     decision_tree_model = create_decision_tree_model()
@@ -208,3 +210,5 @@ if __name__ == "__main__":
 
     # find_rfr_best_params_and_score(X_train, y_train, rfr_model)
     # find_linear_regression_best_params(X_train, y_train, lr_model)
+
+    create_torch_lr_model_and_show_loss(X_train, y_train)
