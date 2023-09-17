@@ -11,7 +11,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline, make_pipeline
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.tree import DecisionTreeRegressor
-
 from parameters_optimization import (
     find_rfr_best_params_and_score,
     find_linear_regression_best_params,
@@ -144,9 +143,7 @@ def show_model_feature_importances(model, model_pipeline_name="rfr") -> pd.DataF
         )
         col_names_list = np.append(col_names_list, col_names)
 
-    feature_importances = rfr_model.named_steps[
-        model_pipeline_name
-    ].feature_importances_
+    feature_importances = model.named_steps[model_pipeline_name].feature_importances_
 
     df = pd.DataFrame(
         feature_importances,
@@ -211,4 +208,4 @@ if __name__ == "__main__":
     # find_rfr_best_params_and_score(X_train, y_train, rfr_model)
     # find_linear_regression_best_params(X_train, y_train, lr_model)
 
-    create_torch_lr_model_and_show_loss(X_train, y_train)
+    create_torch_lr_model_and_show_loss(X_train, y_train, X_test, y_test)
