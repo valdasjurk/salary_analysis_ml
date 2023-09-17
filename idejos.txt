@@ -1,6 +1,0 @@
-Padaryti profesijos mappinga kad matysu pavadinimas
-Prideti daugiau stulpeliu?
-Jeigu yra profesijos aprasuymas prideti ji.
-Padaryti grafikus kurie parodo priklausomybes
-Isbandyti kitus modelius, random forest ir kt
-Padaryti grid search, hyperparametru optimizacijas
