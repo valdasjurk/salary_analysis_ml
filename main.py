@@ -50,6 +50,7 @@ def create_lr_model() -> Pipeline:
             ("lin", LinearRegression()),
         ]
     )
+    print("LinearRegression model created")
     return model
 
 
@@ -62,6 +63,7 @@ def create_rfr_model() -> Pipeline:
             ("rfr", RandomForestRegressor(n_estimators=10, max_depth=4)),
         ]
     )
+    print("RandomForestRegressor model created")
     return model
 
 
@@ -70,6 +72,7 @@ def create_decision_tree_model() -> Pipeline:
     model = make_pipeline(
         preprocesor, DecisionTreeRegressor(max_depth=4, min_samples_split=2)
     )
+    print("DecisionTreeRegressor model created")
     return model
 
 
@@ -85,6 +88,7 @@ def create_adaboost_model() -> Pipeline:
             loss="linear",
         ),
     )
+    print("AdaBoostRegressor model created")
     return model
 
 
@@ -96,6 +100,7 @@ def create_lgbm_model() -> Pipeline:
             num_leaves=31, max_depth=-1, learning_rate=0.1, n_estimators=5, n_jobs=-1
         ),
     )
+    print("LGBMRegressor model created")
     return model
 
 
@@ -153,6 +158,13 @@ def show_model_feature_importances(model, model_pipeline_name="rfr") -> pd.DataF
     return df
 
 
+def fit_model_and_show_score(model):
+    model.fit(X_train, y_train)
+    score = model.score(X_test, y_test)
+    print("Model score: ", score)
+    return score
+
+
 if __name__ == "__main__":
     data = load_lithuanian_salary_data()
     data_ext = load_profession_code_data()
@@ -165,37 +177,24 @@ if __name__ == "__main__":
     var_thr.fit_transform(X_train)
 
     lr_model = create_lr_model()
+    fit_model_and_show_score(lr_model)
+
     lr_model.fit(X_train, y_train)
-    prediction = lr_model.predict(X_test)
-    score = lr_model.score(X_test, y_test)
-    print("LinearRegression score: ", score)
     joblib.dump(lr_model, "model.joblib")
 
     rfr_model = create_rfr_model()
-    rfr_model.fit(X_train, y_train)
-    y_pred = rfr_model.predict(X_test)
-    score2 = rfr_model.score(X_test, y_test)
-    print("RandomForestRegressor score: ", score2)
+    fit_model_and_show_score(rfr_model)
 
-    show_model_feature_importances(rfr_model)
+    # show_model_feature_importances(rfr_model)
 
     decision_tree_model = create_decision_tree_model()
-    decision_tree_model.fit(X_train, y_train)
-    prediction3 = decision_tree_model.predict(X_test)
-    score3 = decision_tree_model.score(X_test, y_test)
-    print("DecisionTreeRegressor score: ", score3)
+    fit_model_and_show_score(decision_tree_model)
 
     adaboost_model = create_adaboost_model()
-    decision_tree_model.fit(X_train, y_train)
-    prediction_adb = decision_tree_model.predict(X_test)
-    score_adb = decision_tree_model.score(X_test, y_test)
-    print("AdaBoost score: ", score_adb)
+    fit_model_and_show_score(adaboost_model)
 
     lgbm_model = create_lgbm_model()
-    lgbm_model.fit(X_train, y_train)
-    prediction_lgbm = lgbm_model.predict(X_test)
-    score_lgbm = lgbm_model.score(X_test, y_test)
-    print("LightGBM score: ", score_lgbm)
+    fit_model_and_show_score(lgbm_model)
 
     # scenarios = create_testing_scenarios()
     # predictions = lr_model.predict(scenarios)
