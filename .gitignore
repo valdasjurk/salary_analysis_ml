@@ -2,3 +2,4 @@ pycache
 *.json
 *.pyc
 *.joblib
+*.png
