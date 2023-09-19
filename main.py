@@ -16,7 +16,7 @@ from parameters_optimization import (
     find_linear_regression_best_params,
 )
 from preprocessor import create_preprocessor
-from create_testing_scenarios import create_testing_scenarios, create_predictions_plot
+from create_testing_scenarios import create_testing_scenarios, plot_predictions
 from load_datasets import load_lithuanian_salary_data, load_profession_code_data
 from sklearn.decomposition import PCA
 from sklearn.feature_selection import VarianceThreshold
@@ -184,7 +184,7 @@ if __name__ == "__main__":
     rfr_model = create_rfr_model()
     fit_model_and_show_score(rfr_model)
 
-    plot_shap_importances(rfr_model, X_train, y_train)
+    # plot_shap_importances(rfr_model, X_train, y_train)
     # show_model_feature_importances(rfr_model)
 
     decision_tree_model = create_decision_tree_model()
@@ -196,13 +196,10 @@ if __name__ == "__main__":
     lgbm_model = create_lgbm_model()
     fit_model_and_show_score(lgbm_model)
 
-    # scenarios = create_testing_scenarios()
-    # predictions = lr_model.predict(scenarios)
-    # predictions_df = scenarios.assign(predictions=predictions)
-    # print(predictions_df)
-
-    # img = create_predictions_plot(predictions_df)
-    # img.show()
+    scenarios = create_testing_scenarios()
+    predictions = lr_model.predict(scenarios)
+    predictions_df = scenarios.assign(predictions=predictions)
+    img = plot_predictions(predictions_df)
 
     # find_rfr_best_params_and_score(X_train, y_train, rfr_model)
     # find_linear_regression_best_params(X_train, y_train, lr_model)
