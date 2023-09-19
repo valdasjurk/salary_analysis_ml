@@ -8,7 +8,7 @@ def parse_x_column_names(model):
     preprocessor_steps = [
         ["num", "imputer"],
         ["cat", "ohe"],
-        # ["cust", "ohe_cust"],
+        ["cust", "ohe_cust"],
     ]
     col_names_list = np.array([])
     for i in preprocessor_steps:
@@ -25,7 +25,7 @@ def plot_shap_importances(model, X_train, y_train):
     # explain the model's predictions using SHAP
     column_names = parse_x_column_names(model)
     model.fit(X_train, y_train)
-    model_masker = model[:-1].transform(X_train)
+    model_masker = model[:-1].transform(X_train).toarray()
 
     explainer = shap.Explainer(
         model.named_steps[MODEL_NAME],
