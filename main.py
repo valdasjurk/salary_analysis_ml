@@ -22,6 +22,7 @@ from sklearn.decomposition import PCA
 from sklearn.feature_selection import VarianceThreshold
 import numpy as np
 from torch_linear_regression import create_torch_lr_model_and_show_loss
+from shap_importances import plot_shap_importances
 
 if sys.platform == "win32":
     if isinstance(sys.stdout, io.TextIOWrapper) and sys.version_info >= (3, 7):
@@ -44,7 +45,7 @@ def create_lr_model() -> Pipeline:
     """Function creates LinearRegression model"""
     preprocesor = create_preprocessor()
     model = Pipeline(
-        [
+        steps=[
             ("preprocessor", preprocesor),
             ("pol", PolynomialFeatures(degree=3)),
             ("lin", LinearRegression()),
@@ -178,13 +179,12 @@ if __name__ == "__main__":
 
     lr_model = create_lr_model()
     fit_model_and_show_score(lr_model)
-
-    lr_model.fit(X_train, y_train)
     joblib.dump(lr_model, "model.joblib")
 
     rfr_model = create_rfr_model()
     fit_model_and_show_score(rfr_model)
 
+    plot_shap_importances(rfr_model, X_train, y_train)
     # show_model_feature_importances(rfr_model)
 
     decision_tree_model = create_decision_tree_model()
