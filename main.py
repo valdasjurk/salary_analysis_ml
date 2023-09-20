@@ -22,7 +22,7 @@ from sklearn.decomposition import PCA
 from sklearn.feature_selection import VarianceThreshold
 import numpy as np
 from torch_linear_regression import create_torch_lr_model_and_show_loss
-from shap_importances import plot_shap_importances
+from shap_importances import plot_shap_importances, parse_x_column_names
 
 if sys.platform == "win32":
     if isinstance(sys.stdout, io.TextIOWrapper) and sys.version_info >= (3, 7):
@@ -98,7 +98,12 @@ def create_lgbm_model() -> Pipeline:
     model = make_pipeline(
         preprocesor,
         LGBMRegressor(
-            num_leaves=31, max_depth=-1, learning_rate=0.1, n_estimators=5, n_jobs=-1
+            num_leaves=31,
+            max_depth=-1,
+            learning_rate=0.1,
+            n_estimators=5,
+            n_jobs=-1,
+            force_col_wise=True,
         ),
     )
     print("LGBMRegressor model created")
@@ -135,28 +140,14 @@ def remove_low_variance_features() -> Pipeline:
 
 
 def show_model_feature_importances(model, model_pipeline_name="rfr") -> pd.DataFrame:
-    preprocessor_steps = [
-        ["num", "imputer"],
-        ["cat", "ohe"],
-        ["cust", "ohe_cust"],
-    ]
-    col_names_list = np.array([])
-    for i in preprocessor_steps:
-        col_names = (
-            model.named_steps["preprocessor"]
-            .named_transformers_[i[0]][i[1]]
-            .get_feature_names_out()
-        )
-        col_names_list = np.append(col_names_list, col_names)
-
+    x_column_names = parse_x_column_names(model)
     feature_importances = model.named_steps[model_pipeline_name].feature_importances_
-
     df = pd.DataFrame(
-        feature_importances,
-        index=col_names_list,
+        list(zip(x_column_names, feature_importances)),
+        columns=["Feature", "Importance"],
     )
-    print(df)
-    return df
+    df_sorted = df.sort_values(by=["Importance"], ascending=False).head(20)
+    return df_sorted
 
 
 def fit_model_and_show_score(model):
@@ -185,21 +176,18 @@ if __name__ == "__main__":
     fit_model_and_show_score(rfr_model)
 
     # plot_shap_importances(rfr_model, X_train, y_train)
-    # show_model_feature_importances(rfr_model)
+    show_model_feature_importances(rfr_model)
 
-    decision_tree_model = create_decision_tree_model()
-    fit_model_and_show_score(decision_tree_model)
+    # decision_tree_model = create_decision_tree_model()
+    # fit_model_and_show_score(decision_tree_model)
 
-    adaboost_model = create_adaboost_model()
-    fit_model_and_show_score(adaboost_model)
+    # lgbm_model = create_lgbm_model()
+    # fit_model_and_show_score(lgbm_model)
 
-    lgbm_model = create_lgbm_model()
-    fit_model_and_show_score(lgbm_model)
-
-    scenarios = create_testing_scenarios()
-    predictions = lr_model.predict(scenarios)
-    predictions_df = scenarios.assign(predictions=predictions)
-    img = plot_predictions(predictions_df)
+    # scenarios = create_testing_scenarios()
+    # predictions = lr_model.predict(scenarios)
+    # predictions_df = scenarios.assign(predictions=predictions)
+    # img = plot_predictions(predictions_df)
 
     # find_rfr_best_params_and_score(X_train, y_train, rfr_model)
     # find_linear_regression_best_params(X_train, y_train, lr_model)
