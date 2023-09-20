@@ -1,5 +1,5 @@
 from sklearn.base import BaseEstimator, TransformerMixin
-from src.load_datasets import load_profession_code_data
+from load_datasets import load_profession_code_data
 
 
 class ProfessionTransformer(BaseEstimator, TransformerMixin):

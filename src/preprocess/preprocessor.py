@@ -2,7 +2,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
-from src.preprocess.custom_profession_name_transformer import ProfessionTransformer
+from preprocess.custom_profession_name_transformer import ProfessionTransformer
 
 NUM_FEATURES = ["profesija", "stazas", "darbo_laiko_dalis"]
 CAT_FEATURES = ["lytis", "amzius", "issilavinimas"]

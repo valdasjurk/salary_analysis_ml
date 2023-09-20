@@ -1,33 +1,28 @@
-import sys, io
+import io
+import sys
 
-import matplotlib.pyplot as plt
 import pandas as pd
-import seaborn as sns
 from lightgbm import LGBMRegressor
 from sklearn.ensemble import AdaBoostRegressor, RandomForestRegressor
+from sklearn.feature_selection import VarianceThreshold
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline, make_pipeline
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.tree import DecisionTreeRegressor
-from src.preprocess.parameters_optimization import (
-    find_rfr_best_params_and_score,
-    find_linear_regression_best_params,
-)
-from src.preprocess.preprocessor import create_preprocessor
-from src.predictions.create_testing_scenarios import (
+
+from load_datasets import load_lithuanian_salary_data
+from predictions.create_testing_scenarios import (
     create_testing_scenarios,
     plot_predictions,
 )
-from src.load_datasets import load_lithuanian_salary_data, load_profession_code_data
-from sklearn.decomposition import PCA
-from sklearn.feature_selection import VarianceThreshold
-import numpy as np
-from src.torch_linear_regression import create_torch_lr_model_and_show_loss
-from src.visualization.shap_importances import (
-    plot_shap_importances,
-    parse_x_column_names,
+from preprocess.parameters_optimization import (
+    find_linear_regression_best_params,
+    find_rfr_best_params_and_score,
 )
+from preprocess.preprocessor import create_preprocessor
+from torch_linear_regression import create_torch_lr_model_and_show_loss
+from visualization.shap_importances import parse_x_column_names, plot_shap_importances
 
 if sys.platform == "win32":
     if isinstance(sys.stdout, io.TextIOWrapper) and sys.version_info >= (3, 7):
