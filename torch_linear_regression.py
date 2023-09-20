@@ -64,6 +64,5 @@ def create_torch_lr_model_and_show_loss(X_train, y_train, X_test, y_test):
     # evaluate model at end of epoch
     with torch.no_grad():
         y_pred = model(X_test)
-        acc = (y_pred == y_test).float().mean()
-        acc = float(acc)
-        print(f"accuracy {acc}")
+        mse = criterion(y_pred, y_test)
+        print(f"MSE: {mse}")
