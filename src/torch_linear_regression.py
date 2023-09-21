@@ -19,7 +19,7 @@ class LinearRegressionModel(nn.Module):
         return self.linear(x)
 
 
-def prepare_data(X_data):
+def preprocess_data(X_data):
     ohe = OneHotEncoder(handle_unknown="ignore")
     X_cat_data = pd.DataFrame(ohe.fit_transform(X_data[CAT_FEATURES]).toarray())
     X_num_data = X_data.drop(["lytis", "amzius", "issilavinimas"], axis=1)
@@ -30,39 +30,43 @@ def prepare_data(X_data):
     return X_data_preprocessed
 
 
-def create_torch_lr_model_and_show_loss(X_train, y_train, X_test, y_test):
-    X_train = prepare_data(X_train)
-    x_train = Variable(torch.Tensor(X_train.to_numpy()))
+def convert_data_to_torch(X_train, y_train, X_test, y_test):
+    X_train = preprocess_data(X_train)
+    X_train = Variable(torch.Tensor(X_train.to_numpy()))
     y_train = [[i] for i in y_train]
     y_train = Variable(torch.Tensor(y_train))
 
-    X_test = prepare_data(X_test)
+    X_test = preprocess_data(X_test)
     X_test = Variable(torch.Tensor(X_test.to_numpy()))
     y_test = [[i] for i in y_test]
     y_test = Variable(torch.Tensor(y_test))
+    return X_train, y_train, X_test, y_test
 
-    model = LinearRegressionModel(x_train.shape[1], y_train.shape[1])
+
+def create_torch_lr_model_and_show_loss(X_train, y_train, X_test, y_test):
+    X_train, y_train, X_test, y_test = convert_data_to_torch(
+        X_train, y_train, X_test, y_test
+    )
+    model = LinearRegressionModel(X_train.shape[1], y_train.shape[1])
     # Define loss and optimizer
     criterion = nn.MSELoss(reduction="mean")
     optimizer = optim.SGD(model.parameters(), lr=0.000001)
-    # loss_values = []
+    loss_values = []
     # Train the model
     for epoch in range(N_EPOCHS):
         # Forward pass
-        outputs = model(x_train)
-        # print("outputs: ", outputs)
+        outputs = model(X_train)
         loss = criterion(outputs, y_train)
         # Backward pass and optimization
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
-        # loss_values.append(loss.item())
+        loss_values.append(loss.item())
         if (epoch + 1) % 10 == 0:
             print(f"Epoch {epoch+1}/{100}, Loss: {loss.item()}")
-    # plt.plot(loss_values)
-    # plt.show()
     # evaluate model at end of epoch
     with torch.no_grad():
         y_pred = model(X_test)
         mse = criterion(y_pred, y_test)
-        print(f"MSE: {mse}")
+        print(f"Torch MSE: {mse}")
+    return mse, loss_values
