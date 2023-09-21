@@ -1,5 +1,6 @@
 import shap
 import numpy as np
+import matplotlib.pyplot as plt
 
 MODEL_NAME = "rfr"  # RandomForestRegressor
 
@@ -21,7 +22,7 @@ def parse_x_column_names(model):
     return col_names_list
 
 
-def plot_shap_importances(model, X_train, y_train):
+def plot_shap_importances(model, X_train, y_train, show_or_save="show"):
     # explain the model's predictions using SHAP
     column_names = parse_x_column_names(model)
     model.fit(X_train, y_train)
@@ -33,4 +34,9 @@ def plot_shap_importances(model, X_train, y_train):
         feature_names=column_names,
     )
     shap_values = explainer(model_masker)
-    shap.plots.beeswarm(shap_values, max_display=15)
+    fig = shap.plots.beeswarm(shap_values, max_display=15, show=False)
+    if show_or_save == "show":
+        plt.show()
+    else:
+        plt.savefig("reports/figures/shap.png")
+    return fig
