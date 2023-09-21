@@ -10,6 +10,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline, make_pipeline
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.tree import DecisionTreeRegressor
+from sklearn.metrics import mean_squared_error
 
 from load_datasets import load_lithuanian_salary_data
 from predictions.create_testing_scenarios import (
@@ -153,8 +154,29 @@ def show_model_feature_importances(model, model_pipeline_name="rfr") -> pd.DataF
 def fit_model_and_show_score(model):
     model.fit(X_train, y_train)
     score = model.score(X_test, y_test)
+    y_pred = model.predict(X_test)
+    mse = mean_squared_error(y_test, y_pred)
     print("Model score: ", score)
-    return score
+    print("MSE: ", mse)
+    return mse
+
+
+def compare_lr_scikit_to_torch():
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=TEST_SIZE)
+
+    lr_model = create_lr_model()
+    mse_scikit = int(fit_model_and_show_score(lr_model))
+    mse_torch, _ = create_torch_lr_model_and_show_loss(X_train, y_train, X_test, y_test)
+    mse_torch = int(mse_torch)
+
+    if mse_scikit < mse_torch:
+        print(
+            f"Scikit learn LinearRegression model is better with a MSE value {mse_scikit} compared to pyTorch nn.Linear regression MSE value {mse_torch}"
+        )
+    else:
+        print(
+            f"pyTorch nn.Linear regression model is better with a MSE value {mse_torch} compared to Scikit learn LinearRegression MSE value {mse_scikit}"
+        )
 
 
 if __name__ == "__main__":
@@ -168,13 +190,13 @@ if __name__ == "__main__":
     var_thr.fit_transform(X_train)
 
     lr_model = create_lr_model()
-    fit_model_and_show_score(lr_model)
+    mse_lr = fit_model_and_show_score(lr_model)
 
     rfr_model = create_rfr_model()
     fit_model_and_show_score(rfr_model)
 
-    # plot_shap_importances(rfr_model, X_train, y_train)
-    show_model_feature_importances(rfr_model)
+    plot_shap_importances(rfr_model, X_train, y_train, show_or_save="save")
+    # show_model_feature_importances(rfr_model)
 
     # decision_tree_model = create_decision_tree_model()
     # fit_model_and_show_score(decision_tree_model)
@@ -190,4 +212,6 @@ if __name__ == "__main__":
     # find_rfr_best_params_and_score(X_train, y_train, rfr_model)
     # find_linear_regression_best_params(X_train, y_train, lr_model)
 
-    # create_torch_lr_model_and_show_loss(X_train, y_train, X_test, y_test)
+    # mse_torch = create_torch_lr_model_and_show_loss(X_train, y_train, X_test, y_test)
+
+    compare_lr_scikit_to_torch()
