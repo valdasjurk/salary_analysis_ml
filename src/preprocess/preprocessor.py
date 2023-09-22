@@ -3,10 +3,12 @@ from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
 from preprocess.custom_profession_name_transformer import ProfessionTransformer
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 NUM_FEATURES = ["profesija", "stazas", "darbo_laiko_dalis"]
 CAT_FEATURES = ["lytis", "amzius", "issilavinimas"]
 CUSTOM_FEATURES = ["profesija"]
+TFIDF_FEATURES = "profesijos_apibudinimas"
 
 
 def create_preprocessor() -> ColumnTransformer:
@@ -18,18 +20,25 @@ def create_preprocessor() -> ColumnTransformer:
     cust_transformer = Pipeline(
         steps=[
             ("prof_name", ProfessionTransformer()),
-            ("ohe_cust", OneHotEncoder(handle_unknown="ignore")),
+        ]
+    )
+    tfidf_transformer = Pipeline(
+        steps=[
+            ("tfidf", TfidfVectorizer(stop_words=["ir"])),
         ]
     )
     num_transformer = Pipeline(
         steps=[("imputer", SimpleImputer(strategy="most_frequent"))]
     )
 
-    preprocessor = ColumnTransformer(
+    col_transformer = ColumnTransformer(
         transformers=[
             ("num", num_transformer, NUM_FEATURES),
-            ("cust", cust_transformer, CUSTOM_FEATURES),
             ("cat", cat_transformer, CAT_FEATURES),
+            ("text", tfidf_transformer, TFIDF_FEATURES),
         ]
+    )
+    preprocessor = Pipeline(
+        steps=[("cust", cust_transformer), ("col_tran", col_transformer)]
     )
     return preprocessor
