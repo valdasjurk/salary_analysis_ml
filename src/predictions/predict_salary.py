@@ -1,14 +1,21 @@
 import pandas as pd
+import numpy as np
 
 
 def predict_salary(
-    model, sex: str, profession_name: str, experience: float, workload: float
+    model,
+    sex: str,
+    age: str,
+    profession_code: int,
+    experience: int,
+    workload: float,
+    education: str,
 ) -> dict:
-    """Sex = [M, F] , profession_name = gydytojas, experience in years, workload in percentage 0-100%"""
-    profession_dict = {"administratorius": 334}
     data = {
         "lytis": sex,
-        "profesija": profession_dict[profession_name],
+        "amzius": age,
+        "profesija": profession_code,
+        "issilavinimas": education,
         "stazas": experience,
         "darbo_laiko_dalis": workload,
     }
