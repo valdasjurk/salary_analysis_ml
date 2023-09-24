@@ -10,7 +10,7 @@ def create_testing_scenarios(
     exp_year_start, exp_year_end = experience_year
     param_grid = {
         "lytis": ["F", "M"],
-        "stazas": range(exp_year_start, exp_year_end, 3),
+        "stazas": range(int(exp_year_start), int(exp_year_end), 3),
         "darbo_laiko_dalis": range(50, 101, 25),
         "profesija": profession,
         "amzius": age,
@@ -19,7 +19,7 @@ def create_testing_scenarios(
     return pd.DataFrame(ParameterGrid(param_grid))
 
 
-def plot_predictions(data: pd.DataFrame, save=True):
+def plot_predictions(data: pd.DataFrame, show=False):
     sns.scatterplot(
         x="stazas",
         y="predictions",
@@ -31,8 +31,8 @@ def plot_predictions(data: pd.DataFrame, save=True):
     )
     plt.xlabel("Work experience, years")
     plt.ylabel("Predicted yearly salary, eur")
-    if save is True:
-        plt.savefig("reports/figures/testing_predictions.png")
-    else:
+    if show is True:
         plt.show()
+    else:
+        plt.savefig("reports/figures/testing_predictions.png")
     return plt
