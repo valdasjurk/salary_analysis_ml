@@ -6,24 +6,17 @@ from lightgbm import LGBMRegressor
 from sklearn.ensemble import AdaBoostRegressor, RandomForestRegressor
 from sklearn.feature_selection import VarianceThreshold
 from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline, make_pipeline
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.tree import DecisionTreeRegressor
-from sklearn.metrics import mean_squared_error
 
-from load_datasets import load_lithuanian_salary_data
-from predictions.create_testing_scenarios import (
-    create_testing_scenarios,
-    plot_predictions,
-)
-from preprocess.parameters_optimization import (
-    find_linear_regression_best_params,
-    find_rfr_best_params_and_score,
-)
 from preprocess.preprocessor import create_preprocessor
 from torch_linear_regression import create_torch_lr_model_and_show_loss
-from visualization.shap_importances import parse_x_column_names, plot_shap_importances
+from visualization.shap_importances import (
+    parse_x_column_names,
+)
 
 if sys.platform == "win32":
     if isinstance(sys.stdout, io.TextIOWrapper) and sys.version_info >= (3, 7):
@@ -151,67 +144,31 @@ def show_model_feature_importances(model, model_pipeline_name="rfr") -> pd.DataF
     return df_sorted
 
 
-def fit_model_and_show_score(model):
+def fit_model_and_show_score(model, X_train, y_train, X_test, y_test):
     model.fit(X_train, y_train)
     score = model.score(X_test, y_test)
     y_pred = model.predict(X_test)
     mse = mean_squared_error(y_test, y_pred)
-    print("Model score: ", score)
-    print("MSE: ", mse)
+    print("Model score: ", round(score, 3))
+    print("Model MSE: ", round(mse, 3))
     return mse
 
 
-def compare_lr_scikit_to_torch():
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=TEST_SIZE)
-
+def compare_lr_scikit_to_torch(X_train, y_train, X_test, y_test):
     lr_model = create_lr_model()
-    mse_scikit = int(fit_model_and_show_score(lr_model))
+    mse_scikit = int(
+        fit_model_and_show_score(lr_model, X_train, y_train, X_test, y_test)
+    )
+    X_train = X_train.drop(["profesijos_apibudinimas"], axis=1)
+    X_test = X_test.drop(["profesijos_apibudinimas"], axis=1)
     mse_torch, _ = create_torch_lr_model_and_show_loss(X_train, y_train, X_test, y_test)
     mse_torch = int(mse_torch)
 
     if mse_scikit < mse_torch:
         print(
-            f"Scikit learn LinearRegression model is better with a MSE value {mse_scikit} compared to pyTorch nn.Linear regression MSE value {mse_torch}"
+            f"Scikit learn LinearRegression model is more accurate with a MSE value {mse_scikit} compared to pyTorch nn.Linear regression MSE value {mse_torch}"
         )
     else:
         print(
-            f"pyTorch nn.Linear regression model is better with a MSE value {mse_torch} compared to Scikit learn LinearRegression MSE value {mse_scikit}"
+            f"pyTorch nn.Linear regression model is more accurate with a MSE value {mse_torch} compared to Scikit learn LinearRegression MSE value {mse_scikit}"
         )
-
-
-if __name__ == "__main__":
-    data = load_lithuanian_salary_data()
-
-    X, y = split_data_to_xy(data)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=TEST_SIZE)
-    print("Train test splitted")
-
-    var_thr = remove_low_variance_features()
-    var_thr.fit_transform(X_train)
-
-    lr_model = create_lr_model()
-    mse_lr = fit_model_and_show_score(lr_model)
-
-    rfr_model = create_rfr_model()
-    fit_model_and_show_score(rfr_model)
-
-    plot_shap_importances(rfr_model, X_train, y_train, show_or_save="save")
-    # show_model_feature_importances(rfr_model)
-
-    # decision_tree_model = create_decision_tree_model()
-    # fit_model_and_show_score(decision_tree_model)
-
-    # lgbm_model = create_lgbm_model()
-    # fit_model_and_show_score(lgbm_model)
-
-    # scenarios = create_testing_scenarios()
-    # predictions = lr_model.predict(scenarios)
-    # predictions_df = scenarios.assign(predictions=predictions)
-    # img = plot_predictions(predictions_df)
-
-    # find_rfr_best_params_and_score(X_train, y_train, rfr_model)
-    # find_linear_regression_best_params(X_train, y_train, lr_model)
-
-    # mse_torch = create_torch_lr_model_and_show_loss(X_train, y_train, X_test, y_test)
-
-    compare_lr_scikit_to_torch()
