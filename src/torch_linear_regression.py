@@ -22,7 +22,7 @@ class LinearRegressionModel(nn.Module):
 def preprocess_data(X_data):
     ohe = OneHotEncoder(handle_unknown="ignore")
     X_cat_data = pd.DataFrame(ohe.fit_transform(X_data[CAT_FEATURES]).toarray())
-    X_num_data = X_data.drop(["lytis", "amzius", "issilavinimas"], axis=1)
+    X_num_data = X_data.drop(CAT_FEATURES, axis=1)
     X_data_preprocessed = pd.concat(
         [X_num_data.reset_index(drop=True), X_cat_data.reset_index(drop=True)],
         axis=1,
