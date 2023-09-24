@@ -11,7 +11,7 @@ CUSTOM_FEATURES = ["profesija"]
 TFIDF_FEATURES = "profesijos_apibudinimas"
 
 
-def create_preprocessor() -> ColumnTransformer:
+def create_preprocessor() -> Pipeline:
     cat_transformer = Pipeline(
         steps=[
             ("ohe", OneHotEncoder(handle_unknown="ignore")),
