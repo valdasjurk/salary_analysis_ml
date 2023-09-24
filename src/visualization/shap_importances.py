@@ -12,7 +12,7 @@ def parse_x_column_names(model):
     return column_names
 
 
-def plot_shap_importances(model, X_train, y_train, show_or_save="show"):
+def plot_shap_importances(model, X_train, y_train, show=False):
     # explain the model's predictions using SHAP
     model.fit(X_train, y_train)
     model_name = model.steps[-1][0]
@@ -26,7 +26,7 @@ def plot_shap_importances(model, X_train, y_train, show_or_save="show"):
     )
     shap_values = explainer(model_masker)
     fig = shap.plots.beeswarm(shap_values, max_display=15, show=False)
-    if show_or_save == "show":
+    if show is True:
         plt.show()
     else:
         plt.savefig("reports/figures/shap.png")
