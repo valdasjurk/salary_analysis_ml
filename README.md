@@ -1,6 +1,7 @@
 # Lithuanian salary analysis 2018
 
 data source: https://get.data.gov.lt/datasets/gov/lsd/darbo_uzmokestis/DarboUzmokestis2018 
+profession codes list: https://www.profesijuklasifikatorius.lt/?q=lt/medziosarasas
 
 Project structure:
 ```
