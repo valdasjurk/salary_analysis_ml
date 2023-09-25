@@ -36,9 +36,13 @@ Compare scikit LinearRegression and pyTorch Linear models:
 ```bash
 python run.py --compare_lr_scikit_to_torch_by_mse
 ```
-Create various testing scenarios with scikit LinearRegression model. Function takes arguments: experience_year (from, to), profession code name, age group and education (G2, G4) and results plotting or saving (--show True for plot, False for saving):
+Create various testing scenarios with scikit LinearRegression model. Function takes arguments: experience_year (from, to), profession code name, age group and education (G2, G4) and results plotting or saving (--show True for plot, False for saving)(given values as example):
 ```bash
 python run.py --create_testing_scenarios_and_predict --experience_year 1,31 --profession 251 --age_group 30-39 --education G4 --show True
+```
+You can predict yearly salary with an input of: sex, age group, profession code, work experience, workload and education degree (given values as example).
+```bash
+python run.py --predict_yearly_salary --sex M --age 30-39 --profession_code 334 --exp 5 --workload 100 --educ G4
 ```
 Plot or save model feature imporances with SHAP. Function takes one argument (--show) for plotting (True) or saving (False):
 ```bash
