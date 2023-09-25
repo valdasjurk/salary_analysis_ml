@@ -29,7 +29,7 @@ def create_lr_model_and_show_score():
     var_threshold = remove_low_variance_features()
     var_threshold.fit_transform(X_train)
     model = create_lr_model()
-    # fit_model_and_show_score(model, X_train, y_train, X_test, y_test)
+    fit_model_and_show_score(model, X_train, y_train, X_test, y_test)
     return model
 
 
@@ -130,12 +130,12 @@ if __name__ == "__main__":
         "--predict_yearly_salary",
         action="store_true",
     )
-    parser.add_argument("--sex")
-    parser.add_argument("--profession_code")
-    parser.add_argument("--exp")
-    parser.add_argument("--workload")
-    parser.add_argument("--age")
-    parser.add_argument("--educ")
+    parser.add_argument("--sex", type=str)
+    parser.add_argument("--profession_code", type=int)
+    parser.add_argument("--exp", type=int)
+    parser.add_argument("--workload", type=int)
+    parser.add_argument("--age", type=str)
+    parser.add_argument("--educ", type=str)
 
     args = parser.parse_args()
 
