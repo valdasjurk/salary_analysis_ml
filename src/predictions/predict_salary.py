@@ -1,5 +1,13 @@
 import pandas as pd
-import numpy as np
+import logging
+
+LOGGER_FILENAME = "logger.log"
+
+logging.basicConfig(
+    filename=LOGGER_FILENAME,
+    format="%(asctime)s %(levelname)-8s %(message)s",
+    level=logging.INFO,
+)
 
 
 def predict_salary(
@@ -21,5 +29,5 @@ def predict_salary(
     }
     z = pd.DataFrame([data])
     result = {"result": {"Yearly salary prediction, eur": round(model.predict(z)[0])}}
-    print(result)
+    logging.info(result)
     return result

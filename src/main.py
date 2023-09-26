@@ -1,6 +1,7 @@
 import io
 import sys
 
+import logging
 import pandas as pd
 from lightgbm import LGBMRegressor
 from sklearn.ensemble import AdaBoostRegressor, RandomForestRegressor
@@ -33,6 +34,13 @@ XCOLS = [
     "svoris",
 ]
 YCOLS = "dbu_metinis"
+LOGGER_FILENAME = "logger.log"
+
+logging.basicConfig(
+    filename=LOGGER_FILENAME,
+    format="%(asctime)s %(levelname)-8s %(message)s",
+    level=logging.INFO,
+)
 
 
 def create_lr_model() -> Pipeline:
@@ -45,7 +53,7 @@ def create_lr_model() -> Pipeline:
             ("lin", LinearRegression()),
         ]
     )
-    print("LinearRegression model created")
+    logging.info("LinearRegression model created")
     return model
 
 
@@ -58,7 +66,7 @@ def create_rfr_model() -> Pipeline:
             ("rfr", RandomForestRegressor(n_estimators=10, max_depth=4)),
         ]
     )
-    print("RandomForestRegressor model created")
+    logging.info("RandomForestRegressor model created")
     return model
 
 
@@ -141,6 +149,7 @@ def show_model_feature_importances(model, model_pipeline_name="rfr") -> pd.DataF
         columns=["Feature", "Importance"],
     )
     df_sorted = df.sort_values(by=["Importance"], ascending=False).head(20)
+    logging.info(f"Model feature importances: {df_sorted}")
     return df_sorted
 
 
@@ -149,8 +158,8 @@ def fit_model_and_show_score(model, X_train, y_train, X_test, y_test):
     score = model.score(X_test, y_test)
     y_pred = model.predict(X_test)
     mse = mean_squared_error(y_test, y_pred)
-    print("Model score: ", round(score, 3))
-    print("Model MSE: ", round(mse, 3))
+    logging.info(f"Model accuracy: {score}")
+    logging.info(f"Model MSEs: {mse}")
     return mse
 
 
@@ -165,10 +174,10 @@ def compare_lr_scikit_to_torch(X_train, y_train, X_test, y_test):
     mse_torch = int(mse_torch)
 
     if mse_scikit < mse_torch:
-        print(
+        logging.info(
             f"Scikit learn LinearRegression model is more accurate with a MSE value {mse_scikit} compared to pyTorch nn.Linear regression MSE value {mse_torch}"
         )
     else:
-        print(
+        logging.info(
             f"pyTorch nn.Linear regression model is more accurate with a MSE value {mse_torch} compared to Scikit learn LinearRegression MSE value {mse_scikit}"
         )
