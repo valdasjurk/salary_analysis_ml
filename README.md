@@ -1,7 +1,9 @@
 # Lithuanian salary analysis 2018
 
-data source: https://get.data.gov.lt/datasets/gov/lsd/darbo_uzmokestis/DarboUzmokestis2018 
+data source: https://get.data.gov.lt/datasets/gov/lsd/darbo_uzmokestis/DarboUzmokestis2018 <br />
 profession codes list: https://www.profesijuklasifikatorius.lt/?q=lt/medziosarasas
+
+This model is used to predict yearly salary based on main parameters such as : sex, age group, profession/working sector, experience and education. 
 
 Project structure:
 ```
