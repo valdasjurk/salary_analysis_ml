@@ -1,7 +1,6 @@
 import os
 import sys
 import argparse
-from typing import List
 
 sys.path.append(os.path.join(os.getcwd(), "src/"))
 from sklearn.model_selection import train_test_split
@@ -56,7 +55,6 @@ def create_testing_scenarios_and_predict(
     scenarios = create_testing_scenarios(experience_year, profession, age, education)
     lr_model = create_lr_model()
     lr_model.fit(X_train, y_train)
-    print(scenarios)
     predictions = lr_model.predict(scenarios)
     predictions_df = scenarios.assign(predictions=predictions)
     plot_predictions(predictions_df, bool(show))
@@ -141,7 +139,7 @@ if __name__ == "__main__":
 
     if args.create_lr_model_and_show_score:
         create_lr_model_and_show_score()
-    if args.create_lr_model_and_show_score:
+    if args.create_rfr_model_and_show_score:
         create_rfr_model_and_show_score()
     if args.compare_lr_scikit_to_torch_by_mse:
         compare_lr_scikit_to_torch_by_mse()
