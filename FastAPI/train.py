@@ -1,8 +1,13 @@
 import joblib
-from src.main import load_lithuanian_salary_data, split_data_to_xy, create_lr_model
+import sys
+import os
+
+sys.path.append(os.path.join(os.getcwd(), "src/"))
+
+from load_datasets import load_lithuanian_salary_data
+from main import split_data_to_xy, create_lr_model
 from sklearn.model_selection import train_test_split
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import OneHotEncoder
+
 
 TEST_SIZE = 0.3
 
