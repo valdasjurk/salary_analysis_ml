@@ -57,7 +57,7 @@ def create_testing_scenarios_and_predict(
     lr_model.fit(X_train, y_train)
     predictions = lr_model.predict(scenarios)
     predictions_df = scenarios.assign(predictions=predictions)
-    plot_predictions(predictions_df, bool(show))
+    plot_predictions(predictions_df, eval(show))
 
 
 def load_and_split_dataset():
@@ -75,7 +75,7 @@ def shap_feature_importances(show):
     X_train, _, y_train, _ = load_and_split_dataset()
 
     model = create_rfr_model_and_show_score()
-    plot_shap_importances(model, X_train, y_train, bool(show))
+    plot_shap_importances(model, X_train, y_train, eval(show))
 
 
 def predict_yearly_salary(sex, age, profession_name, experience, workload, education):
