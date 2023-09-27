@@ -58,7 +58,7 @@ python run.py --shap_feature_importances --show True
 python FastAPI/train.py
 ```
 ```bash
-python -m uvicorn app:app --reload
+python -m uvicorn FastAPI.app:app --reload
 ```
 ```bash
 python FastAPI/test_request.py
