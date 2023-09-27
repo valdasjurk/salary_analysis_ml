@@ -2,6 +2,11 @@ import joblib
 from fastapi import FastAPI
 from pydantic import BaseModel
 import pandas as pd
+import sys
+import os
+
+sys.path.append(os.path.join(os.getcwd(), "src/"))
+from preprocess.preprocessor import create_preprocessor
 
 
 class Salary(BaseModel):
