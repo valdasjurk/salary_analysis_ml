@@ -1,11 +1,18 @@
-# Lithuanian salary analysis 2018
+This ML software is used to predict Lithuanian :lithuania: yearly salary based on parameters such as : sex, age group, profession/working sector, experience and education level. 
 
-data source: https://get.data.gov.lt/datasets/gov/lsd/darbo_uzmokestis/DarboUzmokestis2018 <br />
-profession codes list: https://www.profesijuklasifikatorius.lt/?q=lt/medziosarasas
+## Features
 
-This model is used to predict yearly salary based on main parameters such as : sex, age group, profession/working sector, experience and education. 
+* Load Lithuanian salary data (2018) directly from a url.
+* Add column with profession description using Custom Transformer, based on profession code. Data with profession description is loaded from csv file (data/raw/profesijos.csv). 
+* Preprocess data using OheHotEncoder, SimpleImputer and TfidfVectorizer.
+* Models that can be used for ML prediction: LinearRegression, RandomForestRegression and PyTorch Linear Regression.
+* User can create various testing scenarious (ParameterGrid), predict salary of every scenario and get figure with correlations. 
+* Compare Scikit learn LinearRegression and PyTorch LinearRegression models by MSE value.
+* ML model feature importances can be visualized with SHAP. 
+* All text results are saved in a log, visualizations are plotted or saved (reports/figures) according to user selection. 
 
-Project structure:
+
+## Project structure:
 ```
 project/
 ├── data/
@@ -25,7 +32,7 @@ project/
 ```bash
 pip install -r requirements.txt
 ```
-## Script main functions
+## Examples with main functions
 
 Create scikit LinearRegression model and get score:
 ```bash
@@ -52,7 +59,7 @@ Plot or save model feature imporances with SHAP. Function takes one argument (--
 python run.py --shap_feature_importances --show True
 ```
 
-## Machine learning WEB API with FastAPI:
+## ML WEB API with FastAPI:
 
 ```bash
 python FastAPI/train.py
@@ -65,6 +72,7 @@ python FastAPI/test_request.py
 ```
 You can also try out to predict the salary virtualy on: http://localhost:8000/docs
 
-
-
+## Data Sources 
+* Lithuanian salary data of 2018: https://get.data.gov.lt/datasets/gov/lsd/darbo_uzmokestis/DarboUzmokestis2018 <br />
+* Lithuanian profession codes list: https://www.profesijuklasifikatorius.lt/?q=lt/medziosarasas
 
