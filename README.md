@@ -1,4 +1,4 @@
-This ML software is used to predict Lithuanian :lithuania: yearly salary based on parameters such as : sex, age group, profession/working sector, experience and education level. 
+This ML software is used to predict Lithuanian yearly salary based on parameters such as : sex, age group, profession/working sector, experience and education level. 
 
 ## Features
 
